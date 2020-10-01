@@ -1,5 +1,6 @@
+#line 1 "lex.c"
 
-#line 2 "lex.yy.c"
+#line 3 "lex.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -467,11 +468,11 @@ char *yytext;
 #line 20 "index.l"
   #include "logger.h"
   #include "types.h"
-#line 470 "lex.yy.c"
+#line 471 "lex.c"
 /* Como não precisamos de usar esse código em outra etapa, essa flag é adicionada */
 /* Fim da primeira parte */
 /* Segunda parte: Pattern match! */
-#line 474 "lex.yy.c"
+#line 475 "lex.c"
 
 #define INITIAL 0
 
@@ -691,7 +692,7 @@ YY_DECL
 #line 29 "index.l"
 
 
-#line 694 "lex.yy.c"
+#line 695 "lex.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -800,7 +801,7 @@ YY_RULE_SETUP
 #line 41 "index.l"
 ECHO;
 	YY_BREAK
-#line 803 "lex.yy.c"
+#line 804 "lex.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 

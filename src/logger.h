@@ -33,12 +33,12 @@
  */
 typedef enum AvailableColors
 {
-  RED,     // Vermelho
-  GREEN,   // Verde
-  YELLOW,  // Amarelo
-  BLUE,    // Azul
-  MAGENTA, // Magenta
-  CYAN     // Ciano
+	RED,	 // Vermelho
+	GREEN,	 // Verde
+	YELLOW,	 // Amarelo
+	BLUE,	 // Azul
+	MAGENTA, // Magenta
+	CYAN	 // Ciano
 } AvailableColors;
 
 /**
