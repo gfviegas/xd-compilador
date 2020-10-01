@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  runner:
+    image: compiladores-tp1:latest
+    build: .
+    container_name: compiladores-tp1
+    volumes:
+      - ./:/usr/src/tp1
