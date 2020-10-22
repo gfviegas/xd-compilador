@@ -1,7 +1,7 @@
 /* Primeira parte:  */
 %{
-  #include "logger.h"
-  #include "types.h"
+  #include "../common/logger.h"
+  #include "../common/types.h"
 %}
 
 /* Como não precisamos de usar esse código em outra etapa, essa flag é adicionada */

@@ -1,24 +1,24 @@
 
-OBJFILES = $(patsubst %.c, %.o, src/index.l)
-TARGET   = tp1
+OBJFILES = $(patsubst %.c, %.o, src/lex/index.l)
+TARGET   = lex-xd
 
 all: build
 build: $(TARGET)
 
 $(TARGET): $(OBJFILES)
-	cd ./src && \
+	cd ./src/lex && \
 	flex -o lex.c index.l && \
-	gcc lex.c logger.c types.c -o ../build/tp1
+	gcc lex.c ../common/logger.c ../common/types.c -o ../../build/lex-xd
 
 clean:
 	rm -f $(TARGET) $(shell find . -name '*.h.gch') $(shell find . -name '*.o') $(shell find . -name '*.out') *~
 run:
-	./build/tp1
+	./build/lex-xd
 test1:
-	./build/tp1 < resources/input.txt
+	./build/lex-xd < resources/input.txt
 test2:
-	./build/tp1 < resources/input2.txt
+	./build/lex-xd < resources/input2.txt
 test3:
-	./build/tp1 < resources/input3.txt
+	./build/lex-xd < resources/input3.txt
 test:
 	./init.sh

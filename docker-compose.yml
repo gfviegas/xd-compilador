@@ -2,8 +2,8 @@ version: '2'
 
 services:
   runner:
-    image: compiladores-tp1:latest
+    image: xd-compiler:latest
     build: .
-    container_name: compiladores-tp1
+    container_name: xd-compiler
     volumes:
-      - ./:/usr/src/tp1
+      - ./:/usr/src/tp2
