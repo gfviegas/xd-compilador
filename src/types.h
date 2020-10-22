@@ -7,11 +7,13 @@
 #ifndef types_h
 #define types_h
 
+#include <stdlib.h>
+#include "logger.h"
+
 /**
  * Tipos de Padrão que o programa reconhece
  **/
-typedef enum Pattern
-{
+typedef enum Pattern {
 	UNKNOWN,
 	POS_INT,
 	NEG_INT,
@@ -20,7 +22,12 @@ typedef enum Pattern
 	LICENSE_PLATE,
 	WORD,
 	PHONE,
-	NAME
+	NAME,
+	// EXTRAS:
+	PHONE_NINE_DIGITS,
+	PHONE_FULL,
+	EMAIL,
+	CEP
 } Pattern;
 
 /**

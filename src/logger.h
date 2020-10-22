@@ -23,7 +23,7 @@
 #define ANSI_COLOR_RESET "\x1b[0m"
 
 // Tamanho da linha a ser impressa diversas vezes
-#define LINE_SIZE 60
+#define LINE_SIZE 100
 
 // Tamanho máximo de uma string a ser impressa com a funcao cprintf
 #define CPRINTF_BUFFER_LENGTH 4096
