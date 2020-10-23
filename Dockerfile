@@ -9,8 +9,8 @@ RUN apk update
 RUN apk add flex g++ make bash
 
 # Copiando arquivos fonte
-COPY . /usr/src/tp1
-WORKDIR /usr/src/tp1
+COPY . /usr/src/tp2
+WORKDIR /usr/src/tp2
 
 RUN make
 

@@ -30,7 +30,7 @@ Arquivo: Documento
 
 Os tipos de dados sempre começam com letra maiúscula e a linguagem segue o padrão CamelCase.
 
-
+A linguagem vai aceitar hexadecimais
 
 A linguagem tem poder para criar tipos abstratos de dados (structs) que são chamados de Troço.
 
@@ -39,12 +39,15 @@ Vera:  valor verdadeiro pra tipo booleano
 Bobagi - valor falso pra tipo booleano
 cêsabese - Comparador (equivalente a if)
 intao - dar inicio a bloco de código (equivalente a then)
+intaotabao - dar fim a bloco de código (equivalente a end)
 sinão - Comparador equivalente a else
 uai - ponto e virgula
 negocio - declara o inicio de uma funcao
-assim - dar inicio a bloco de função/modulo
-tendeu - dar fim a bloco de função/modulo
+tendeu - dar fim a bloco de função
+assim - dar inicio a bloco de modulo
+cabô - dar fim a bloco de modulo
 trem - declarar uma constante
+desembucha - printar algo
 
 Operadores lógicos:
 ou - OR (|)
@@ -61,6 +64,7 @@ menus - \-
 veiz - *
 divididu - /
 resto - %
+elevado - **
 
 
 Para declarar uma função: tem que usar a palavra chave “negocio" seguido do nome, parâmetros entre paranteses separados por virgulas, e “assim”, seguido do corpo da função e finalizado por “tendeu”
@@ -80,3 +84,5 @@ tendeu
 negocio divididu(Numero x, Numero y) assim
     devorve x divididu y
 tendeu
+
+

@@ -1,0 +1,23 @@
+assim
+	negocio div(Numero x, 0) intao
+		devorve 0 uai
+	tendeu
+
+	negocio div(Numero x, Numero y) intao
+		devorve x divididu y uai
+	tendeu
+
+	negocio principal(Marpa opcoes) intao
+		trem teste ingual "uma string qualquer" uai
+		trem float ingual 2039.102 uai
+
+		cêsabese float ingualzin vazio intao
+			desembucha "O trem aqui ficou vazio sô" uai
+		sinao
+			desembucha "O trem não tá vazio" uai
+		intaotabao
+
+		desembucha teste uai
+	tendeu
+
+cabô

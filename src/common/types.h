@@ -13,21 +13,50 @@
 /**
  * Tipos de Padrão que o programa reconhece
  **/
-typedef enum Pattern {
+typedef enum Pattern
+{
 	UNKNOWN,
-	POS_INT,
-	NEG_INT,
+	IDENTIFIER,
+	INT,
 	FLOAT,
-	NEG_FLOAT,
-	LICENSE_PLATE,
-	WORD,
-	PHONE,
-	NAME,
-	// EXTRAS:
-	PHONE_NINE_DIGITS,
-	PHONE_FULL,
-	EMAIL,
-	CEP
+	// BINARY,
+	STRING,
+	ATOM,
+	NIL,
+	TRUE,
+	FALSE,
+	ASSIGN,
+	AND,
+	OR,
+	NOT,
+	GT,
+	LT,
+	MOD,
+	EQUAL,
+	NOT_EQUAL,
+	SUM,
+	SUB,
+	MUL,
+	DIV,
+	POW,
+	FUNC_START,
+	FUNC_END,
+	MODULE_START,
+	MODULE_END,
+	PARAN_OPEN,
+	PARAN_CLOSE,
+	BRACK_OPEN,
+	BRACK_CLOSE,
+	COMMA,
+	PRINT,
+	IF,
+	THEN,
+	ELSE,
+	END,
+	CONST,
+	DELIMITER,
+	RETURN,
+	STATIC_TYPE
 } Pattern;
 
 /**
