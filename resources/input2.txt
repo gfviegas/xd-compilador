@@ -1,0 +1,14 @@
+assim
+  negocio principal(Marpa opcoes) entao
+    trem float ingual 2039.102 uai
+
+    cesabese float ingualzin vazio entao
+      desembucha "O trem aqui ficou vazio sô" uai
+		senao
+			desembucha "O trem não tá vazio" uai
+		entaotabao
+
+		desembucha teste uai
+
+  tendeu
+cabo
