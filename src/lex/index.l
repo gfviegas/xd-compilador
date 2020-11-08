@@ -1,11 +1,9 @@
 /* Primeira parte:  */
 %{
   #include "../common/logger.h"
-  #include "../common/types.h"
+  #include "../common/tokens.h"
+  #include "y.tab.h"
 %}
-
-/* Como não precisamos de usar esse código em outra etapa, essa flag é adicionada */
-%option noyywrap
 
 /* Definições regulares */
 upcaseLetter      			[A-Z]
@@ -32,52 +30,46 @@ eol	       					\n
 {eol}    			{}
 {comment}    		{}
 
-"Nada"				{ printPattern(NIL, yytext); }
-"Vera"				{ printPattern(TRUE, yytext); }
-"Bobagi"			{ printPattern(FALSE, yytext); }
-"ingual"			{ printPattern(ASSIGN, yytext); }
+"Nada"				{ return NIL; }
+"Vera"				{ return BOOLEAN; }
+"Bobagi"			{ return BOOLEAN; }
+"ingual"			{ return ASSIGN; }
 
-"ingualzin"			{ printPattern(EQUAL, yytext); }
-"nadavê com"		{ printPattern(NOT_EQUAL, yytext); }
-"maió que"			{ printPattern(GT, yytext); }
-"menó que"			{ printPattern(LT, yytext); }
-"ou"				{ printPattern(OR, yytext); }
-"i"					{ printPattern(AND, yytext); }
+"ingualzin"			{ return RELOP; }
+"nadavê com"		{ return RELOP; }
+"maió que"			{ return RELOP; }
+"menó que"			{ return RELOP; }
+"ou"				{ return RELOP; }
+"i"					{ return RELOP; }
 
-"mais"				{ printPattern(SUM, yytext); }
-"menus"				{ printPattern(SUB, yytext); }
-"veiz"				{ printPattern(MUL, yytext); }
-"divididu"			{ printPattern(DIV, yytext); }
-"resto"				{ printPattern(MOD, yytext); }
-"elevado a"			{ printPattern(POW, yytext); }
+"mais"				{ return MATHOP; }
+"menus"				{ return MATHOP; }
+"veiz"				{ return MATHOP; }
+"divididu"			{ return MATHOP; }
+"resto"				{ return MATHOP; }
+"elevado a"			{ return MATHOP; }
 
-"intao"				{ printPattern(THEN, yytext); }
-"intaotabao"		{ printPattern(END, yytext); }
-"cêsabese"			{ printPattern(IF, yytext); }
-"sinao"				{ printPattern(ELSE, yytext); }
-"negocio"			{ printPattern(FUNC_START, yytext); }
-"tendeu"			{ printPattern(FUNC_END, yytext); }
-"assim"				{ printPattern(MODULE_START, yytext); }
-"cabô"				{ printPattern(MODULE_END, yytext); }
-"trem"				{ printPattern(CONST, yytext); }
-"desembucha"		{ printPattern(PRINT, yytext); }
-"devorve"			{ printPattern(RETURN, yytext); }
+"intao"				{ return THEN; }
+"intaotabao"		{ return IF_END; }
+"cêsabese"			{ return IF; }
+"sinao"				{ return ELSE; }
+"negocio"			{ return FUNC_START; }
+"tendeu"			{ return FUNC_END; }
+"assim"				{ return MODULE_START; }
+"cabô"				{ return MODULE_END; }
+"trem"				{ return CONST; }
+"desembucha"		{ return PRINT; }
+"devorve"			{ return RETURN; }
 
-{staticType}		{ printPattern(STATIC_TYPE, yytext); }
-{integer}         	{ printPattern(INT, yytext); }
-{float}         	{ printPattern(FLOAT, yytext); }
-"vazio"				{ printPattern(NIL, yytext); }
-{atom}         		{ printPattern(ATOM, yytext); }
-{string}         	{ printPattern(STRING, yytext); }
+{staticType}		{ return TYPE; }
+{integer}         	{ return NUMBER; }
+{float}         	{ return NUMBER; }
+"vazio"				{ return NIL; }
+{atom}         		{ return ATOM; }
+{string}         	{ return STRING; }
 
-"("					{ printPattern(PARAN_OPEN, yytext); }
-")"					{ printPattern(PARAN_CLOSE, yytext); }
-"["					{ printPattern(BRACK_OPEN, yytext); }
-"]"					{ printPattern(BRACK_CLOSE, yytext); }
-","					{ printPattern(COMMA, yytext); }
-
-"uai"				{ printPattern(DELIMITER, yytext); }
-{identifier}      	{ printPattern(IDENTIFIER, yytext); }
+"uai"				{ return DELIMITER; }
+{identifier}      	{ return IDENTIFIER; }
 
 %%
 /* Fim da segunda parte */
