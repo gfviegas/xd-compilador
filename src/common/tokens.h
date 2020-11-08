@@ -33,7 +33,8 @@ typedef enum Token
 	ELSE,
 	IF_END,
 	FUNC_START,
-	FUNC_END
+	FUNC_END,
+	THEN
 } Token;
 
 #endif
