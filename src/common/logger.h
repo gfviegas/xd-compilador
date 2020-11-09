@@ -14,13 +14,15 @@
 #include <ctype.h>
 
 // Código ANSI das cores para colorir o terminal
-#define ANSI_COLOR_RED "\x1b[31m"
-#define ANSI_COLOR_GREEN "\x1b[32m"
-#define ANSI_COLOR_YELLOW "\x1b[33m"
-#define ANSI_COLOR_BLUE "\x1b[34m"
-#define ANSI_COLOR_MAGENTA "\x1b[35m"
-#define ANSI_COLOR_CYAN "\x1b[36m"
-#define ANSI_COLOR_RESET "\x1b[0m"
+#define ANSI_COLOR_RED "\x1b[49;31m"
+#define ANSI_COLOR_GREEN "\x1b[49;32m"
+#define ANSI_COLOR_YELLOW "\x1b[49;33m"
+#define ANSI_COLOR_BLUE "\x1b[49;34m"
+#define ANSI_COLOR_MAGENTA "\x1b[49;35m"
+#define ANSI_COLOR_CYAN "\x1b[49;36m"
+#define ANSI_COLOR_ORANGE "\x1b[49;36m"
+#define ANSI_COLOR_RESET "\x1b[49;0m"
+#define ANSI_COLOR_ERROR "\033[37;41m"
 
 // Tamanho da linha a ser impressa diversas vezes
 #define LINE_SIZE 100
@@ -38,7 +40,8 @@ typedef enum AvailableColors
 	YELLOW,	 // Amarelo
 	BLUE,	 // Azul
 	MAGENTA, // Magenta
-	CYAN	 // Ciano
+	CYAN,	 // Ciano
+	ERROR	 // Erro
 } AvailableColors;
 
 /**
@@ -58,5 +61,13 @@ void cprintf(AvailableColors color, const char *fmt, ...);
  * Imprime uma linha de tamanho LINE_SIZE, em cor Ciano
  */
 void printLine(void);
+
+/**
+ * Imprime uma linha de tamanho LINE_SIZE, em cor determinada
+ */
+void cprintLine(AvailableColors color);
+
+
+void printResetColor();
 
 #endif /* logger_h */

@@ -1,8 +1,8 @@
 /* Primeira parte:  */
 %{
-  #include "../common/logger.h"
+  #include <stdio.h>
   #include "../common/tokens.h"
-  #include "y.tab.h"
+//   #include "y.tab.h"
 %}
 
 /* Definições regulares */
@@ -58,7 +58,7 @@ eol	       					\n
 "assim"				{ return MODULE_START; }
 "cabô"				{ return MODULE_END; }
 "trem"				{ return CONST; }
-"desembucha"		{ return PRINT; }
+"desembucha"		{ return IDENTIFIER; }
 "devorve"			{ return RETURN; }
 
 {staticType}		{ return TYPE; }
@@ -74,10 +74,35 @@ eol	       					\n
 %%
 /* Fim da segunda parte */
 /* Terceira parte: Código C */
+
+extern int yylineno, yychar;
+extern int hasError = 0;
+
 int main(void) {
-  	yylex();
+  	yyparse();
+
 	printf("\n");
+	cprintLine(YELLOW);
+	if (!hasError) {
+		cprintf(GREEN, "Trem de compilar rodô demais da conta!\nPrograma sintaticamente correto\n");
+		return 0;
+	}
+
+	cprintf(RED, "Trem de compilar deu ruim!\nPrograma sintaticamente incorreto!\n");
   	return 0;
+}
+
+void yyerror(const char *str) {
+	cprintf(ERROR, "Uai sô... deu um pobrema: %s na linha %d\n", str, yylineno);
+	printf("Token problemático: ");
+	printResetColor();
+	printToken(yychar);
+	printResetColor();
+	hasError = 1;
+}
+
+int yywrap() {
+	return 1;
 }
 
 /* Fim da terceira parte */

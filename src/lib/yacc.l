@@ -5,12 +5,12 @@
 begin                 :   MODULE_START stmt MODULE_END
                       ;
 stmt                  :   /* épsilon */
-                      |   stmt stmt
-                      |   declarationVariable DELIMITER
-                      |   declarationFunction
-                      |   callFunction
-                      |   conditional
-                      |   returnOperation DELIMITER
+                    //   |   stmt stmt
+                      |   declarationVariable DELIMITER stmt
+                      |   declarationFunction stmt
+                      |   callFunction stmt
+                      |   conditional stmt
+                      |   returnOperation DELIMITER stmt
                       ;
 declarationVariable   :   CONST TYPE IDENTIFIER ASSIGN value
                       |   CONST TYPE IDENTIFIER
