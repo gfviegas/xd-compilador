@@ -7,7 +7,7 @@ begin                 :   MODULE_START stmt MODULE_END
 stmt                  :   /* épsilon */
                       |   declarationVariable DELIMITER stmt
                       |   declarationFunction stmt
-                      |   callFunction stmt
+                      |   callFunction DELIMITER stmt
                       |   conditional stmt
                       |   returnOperation DELIMITER stmt
                       ;
@@ -27,20 +27,18 @@ operation             :   IDENTIFIER MATHOP IDENTIFIER
                       |   IDENTIFIER MATHOP NUMBER
                       |   callFunction
                       ;
-expr                  :   term RELOP term
-                      |   term
+expr                  :   value RELOP value
+                      |   value
                       |   callFunction
                       ;
 callFunction          :   IDENTIFIER PARAN_OPEN parameter PARAN_CLOSE
                       |   IDENTIFIER
                       ;
-term                  :   IDENTIFIER
-                      |   NUMBER
-                      ;
 value                 :   STRING
                       |   NUMBER
                       |   BOOLEAN
                       |   IDENTIFIER
+					  |	  NIL
                       |   callFunction
                       ;
 parameterDeclaration  :   /* épsilon */
@@ -48,10 +46,10 @@ parameterDeclaration  :   /* épsilon */
                       |   TYPE IDENTIFIER
                       ;
 parameter             :   /* épsilon */
-                      |   IDENTIFIER COMMA parameter
-                      |   IDENTIFIER
+                      |   value COMMA parameter
+                      |   value
                       ;
-returnOperation       :   RETURN IDENTIFIER
+returnOperation       :   RETURN value
                       |   RETURN operation
                       ;
 
