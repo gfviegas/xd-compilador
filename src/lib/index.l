@@ -61,6 +61,12 @@ eol	       					\n
 "desembucha"		{ return IDENTIFIER; }
 "devorve"			{ return RETURN; }
 
+"("					{ return PARAN_OPEN; }
+")"					{ return PARAN_CLOSE; }
+"["					{ return BRACK_OPEN; }
+"]"					{ return BRACK_CLOSE; }
+","					{ return COMMA; }
+
 {staticType}		{ return TYPE; }
 {integer}         	{ return NUMBER; }
 {float}         	{ return NUMBER; }
@@ -70,6 +76,7 @@ eol	       					\n
 
 "uai"				{ return DELIMITER; }
 {identifier}      	{ return IDENTIFIER; }
+
 
 %%
 /* Fim da segunda parte */
@@ -93,7 +100,7 @@ int main(void) {
 }
 
 void yyerror(const char *str) {
-	cprintf(ERROR, "Uai sô... deu um pobrema: %s na linha %d\n", str, yylineno);
+	cprintf(ERROR, " Uai sô... deu um pobrema: %s na linha %d \n", str, yylineno);
 	printf("Token problemático: ");
 	printResetColor();
 	printToken(yychar);

@@ -74,7 +74,12 @@ extern int yydebug;
     IF_END = 275,                  /* IF_END  */
     FUNC_START = 276,              /* FUNC_START  */
     FUNC_END = 277,                /* FUNC_END  */
-    THEN = 278                     /* THEN  */
+    THEN = 278,                    /* THEN  */
+    PARAN_OPEN = 279,              /* PARAN_OPEN  */
+    PARAN_CLOSE = 280,             /* PARAN_CLOSE  */
+    BRACK_OPEN = 281,              /* BRACK_OPEN  */
+    BRACK_CLOSE = 282,             /* BRACK_CLOSE  */
+    COMMA = 283                    /* COMMA  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -103,6 +108,11 @@ extern int yydebug;
 #define FUNC_START 276
 #define FUNC_END 277
 #define THEN 278
+#define PARAN_OPEN 279
+#define PARAN_CLOSE 280
+#define BRACK_OPEN 281
+#define BRACK_CLOSE 282
+#define COMMA 283
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED

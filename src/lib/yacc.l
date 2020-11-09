@@ -1,11 +1,10 @@
 %start begin
-%token MODULE_START MODULE_END ASSIGN DELIMITER CONST TYPE IDENTIFIER RELOP MATHOP NUMBER BOOLEAN RETURN STRING NIL ATOM IF ELSE IF_END FUNC_START FUNC_END THEN
+%token MODULE_START MODULE_END ASSIGN DELIMITER CONST TYPE IDENTIFIER RELOP MATHOP NUMBER BOOLEAN RETURN STRING NIL ATOM IF ELSE IF_END FUNC_START FUNC_END THEN PARAN_OPEN PARAN_CLOSE BRACK_OPEN BRACK_CLOSE COMMA
 %%
 
 begin                 :   MODULE_START stmt MODULE_END
                       ;
 stmt                  :   /* épsilon */
-                    //   |   stmt stmt
                       |   declarationVariable DELIMITER stmt
                       |   declarationFunction stmt
                       |   callFunction stmt
@@ -15,10 +14,10 @@ stmt                  :   /* épsilon */
 declarationVariable   :   CONST TYPE IDENTIFIER ASSIGN value
                       |   CONST TYPE IDENTIFIER
                       ;
-declarationFunction   :   FUNC_START TYPE IDENTIFIER '('parameterDeclaration')' THEN stmt FUNC_END
+declarationFunction   :   FUNC_START TYPE IDENTIFIER PARAN_OPEN parameterDeclaration PARAN_CLOSE THEN stmt FUNC_END
                       ;
-conditional           :   IF '('expr')' THEN stmt IF_END
-                      |   IF '('expr')' THEN stmt ELSE stmt IF_END
+conditional           :   IF PARAN_OPEN expr PARAN_CLOSE THEN stmt IF_END
+                      |   IF PARAN_OPEN expr PARAN_CLOSE THEN stmt ELSE stmt IF_END
                       ;
 operation             :   IDENTIFIER MATHOP IDENTIFIER
                       |   operation MATHOP operation
@@ -32,7 +31,7 @@ expr                  :   term RELOP term
                       |   term
                       |   callFunction
                       ;
-callFunction          :   IDENTIFIER'('parameter')'
+callFunction          :   IDENTIFIER PARAN_OPEN parameter PARAN_CLOSE
                       |   IDENTIFIER
                       ;
 term                  :   IDENTIFIER
@@ -45,15 +44,15 @@ value                 :   STRING
                       |   callFunction
                       ;
 parameterDeclaration  :   /* épsilon */
-                      |   TYPE IDENTIFIER',' parameterDeclaration
+                      |   TYPE IDENTIFIER COMMA parameterDeclaration
                       |   TYPE IDENTIFIER
                       ;
 parameter             :   /* épsilon */
-                      |   IDENTIFIER',' parameter
+                      |   IDENTIFIER COMMA parameter
                       |   IDENTIFIER
                       ;
-returnOperation       :   RETURN IDENTIFIER DELIMITER
-                      |   RETURN operation DELIMITER
+returnOperation       :   RETURN IDENTIFIER
+                      |   RETURN operation
                       ;
 
 %%

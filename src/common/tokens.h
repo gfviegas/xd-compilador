@@ -13,7 +13,8 @@
 /**
  * Token da linguagem
  **/
-typedef enum Token {
+typedef enum Token
+{
 	MODULE_START = 258,
 	MODULE_END = 259,
 	ASSIGN = 260,
@@ -34,7 +35,13 @@ typedef enum Token {
 	IF_END = 275,
 	FUNC_START = 276,
 	FUNC_END = 277,
-	THEN = 278
+	THEN = 278,
+
+	PARAN_OPEN = 279,
+	PARAN_CLOSE = 280,
+	BRACK_OPEN = 281,
+	BRACK_CLOSE = 282,
+	COMMA = 283
 } Token;
 
 /**

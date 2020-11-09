@@ -1,6 +1,6 @@
 assim
-    #trem Palavra teste ingual "uma string qualquer" uai
+    trem Palavra teste ingual "uma string qualquer" uai
 	devorve xEsque uai
-	#trem Numero float ingual 2039.102 uai
-	#devorve teste uai
+	trem Numero float ingual 2039.102 uai
+	devorve teste uai
 cabô
