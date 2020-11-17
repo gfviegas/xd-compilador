@@ -85,15 +85,24 @@ extern int yylineno, yychar, yydebug;
 int hasError = 0;
 
 int main(void) {
-	printf("\n%d\n", yytoken_kind_t.YYEMPTY);
+	printFlag();
 
+	cprintLine(MAGENTA);
+	cprintf(TITLE1, "\t Tabela de Tokens:");
+	printf("\n\n");
+	printTable();
 
 	cprintLine(BLUE);
-	cprintf(CYAN, "\t Código Fonte: \n");
+	cprintf(TITLE2, "\t Código Fonte:");
+	printf("\n\n");
+
   	yyparse();
 
 	printf("\n");
 	cprintLine(YELLOW);
+	cprintf(TITLE3, "\t Resultado da compilação:");
+	printf("\n\n");
+
 	if (!hasError) {
 		cprintf(GREEN, "Trem de compilar rodô demais da conta!\nPrograma sintaticamente correto\n");
 		return 0;
@@ -104,11 +113,18 @@ int main(void) {
 }
 
 void yyerror(const char *str) {
-	cprintf(ERROR, " Uai sô... deu um pobrema: %s na linha %d \n", str, yylineno);
+	printf("\n");
+	cprintf(ERROR, "Uai sô... deu um pobrema: %s na linha %d", str, yylineno);
+	printf("\n\n");
+	cprintf(ERROR, "Cê quiria digitarr");
+	cprintf(ERROR2, " %s ", yytext);
+	cprintf(ERROR, "memo??");
+	printf("\n\n");
 	printf("Token problemático: ");
 	printResetColor();
 	printToken(yychar);
 	printResetColor();
+	printf("\n");
 	hasError = 1;
 }
 

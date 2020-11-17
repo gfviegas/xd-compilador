@@ -626,7 +626,7 @@ char *yytext;
 #line 3 "index.l"
   #include <stdio.h>
   #include "../common/tokens.h"
-  #include "yacc.h"
+//   #include "y.tab.h"
 #line 630 "lex.c"
 /* Definições regulares */
 /*boolean              		(Vera|Bobagi)*/
@@ -930,202 +930,202 @@ YY_RULE_SETUP
 case 4:
 YY_RULE_SETUP
 #line 33 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_NIL; }
+{ printSourceCode(yytext, yylineno); return NIL; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 34 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_BOOLEAN; }
+{ printSourceCode(yytext, yylineno); return BOOLEAN; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
 #line 35 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_BOOLEAN; }
+{ printSourceCode(yytext, yylineno); return BOOLEAN; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 36 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_ASSIGN; }
+{ printSourceCode(yytext, yylineno); return ASSIGN; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 38 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_RELOP; }
+{ printSourceCode(yytext, yylineno); return RELOP; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 39 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_RELOP; }
+{ printSourceCode(yytext, yylineno); return RELOP; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 40 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_RELOP; }
+{ printSourceCode(yytext, yylineno); return RELOP; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 41 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_RELOP; }
+{ printSourceCode(yytext, yylineno); return RELOP; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 42 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_RELOP; }
+{ printSourceCode(yytext, yylineno); return RELOP; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 43 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_RELOP; }
+{ printSourceCode(yytext, yylineno); return RELOP; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 45 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_MATHOP; }
+{ printSourceCode(yytext, yylineno); return MATHOP; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
 #line 46 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_MATHOP; }
+{ printSourceCode(yytext, yylineno); return MATHOP; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 47 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_MATHOP; }
+{ printSourceCode(yytext, yylineno); return MATHOP; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 48 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_MATHOP; }
+{ printSourceCode(yytext, yylineno); return MATHOP; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
 #line 49 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_MATHOP; }
+{ printSourceCode(yytext, yylineno); return MATHOP; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
 #line 50 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_MATHOP; }
+{ printSourceCode(yytext, yylineno); return MATHOP; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
 #line 52 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_THEN; }
+{ printSourceCode(yytext, yylineno); return THEN; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
 #line 53 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_IF_END; }
+{ printSourceCode(yytext, yylineno); return IF_END; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
 #line 54 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_IF; }
+{ printSourceCode(yytext, yylineno); return IF; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
 #line 55 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_ELSE; }
+{ printSourceCode(yytext, yylineno); return ELSE; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
 #line 56 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_FUNC_START; }
+{ printSourceCode(yytext, yylineno); return FUNC_START; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
 #line 57 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_FUNC_END; }
+{ printSourceCode(yytext, yylineno); return FUNC_END; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
 #line 58 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_MODULE_START; }
+{ printSourceCode(yytext, yylineno); return MODULE_START; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
 #line 59 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_MODULE_END; }
+{ printSourceCode(yytext, yylineno); return MODULE_END; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
 #line 60 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_CONST; }
+{ printSourceCode(yytext, yylineno); return CONST; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
 #line 61 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_IDENTIFIER; }
+{ printSourceCode(yytext, yylineno); return IDENTIFIER; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
 #line 62 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_RETURN; }
+{ printSourceCode(yytext, yylineno); return RETURN; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
 #line 64 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_PARAN_OPEN; }
+{ printSourceCode(yytext, yylineno); return PARAN_OPEN; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
 #line 65 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_PARAN_CLOSE; }
+{ printSourceCode(yytext, yylineno); return PARAN_CLOSE; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
 #line 66 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_BRACK_OPEN; }
+{ printSourceCode(yytext, yylineno); return BRACK_OPEN; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
 #line 67 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_BRACK_CLOSE; }
+{ printSourceCode(yytext, yylineno); return BRACK_CLOSE; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
 #line 68 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_COMMA; }
+{ printSourceCode(yytext, yylineno); return COMMA; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
 #line 70 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_TYPE; }
+{ printSourceCode(yytext, yylineno); return TYPE; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
 #line 71 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_NUMBER; }
+{ printSourceCode(yytext, yylineno); return NUMBER; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
 #line 72 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_NUMBER; }
+{ printSourceCode(yytext, yylineno); return NUMBER; }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
 #line 73 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_NIL; }
+{ printSourceCode(yytext, yylineno); return NIL; }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
 #line 74 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_ATOM; }
+{ printSourceCode(yytext, yylineno); return ATOM; }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
 #line 75 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_STRING; }
+{ printSourceCode(yytext, yylineno); return STRING; }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
 #line 77 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_DELIMITER; }
+{ printSourceCode(yytext, yylineno); return DELIMITER; }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
 #line 78 "index.l"
-{ printSourceCode(yytext, yylineno); return TOK_IDENTIFIER; }
+{ printSourceCode(yytext, yylineno); return IDENTIFIER; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
@@ -2145,15 +2145,24 @@ extern int yylineno, yychar, yydebug;
 int hasError = 0;
 
 int main(void) {
-	printf("\n%d\n", YYEMPTY);
+	printFlag();
 
+	cprintLine(MAGENTA);
+	cprintf(TITLE1, "\t Tabela de Tokens:");
+	printf("\n\n");
+	printTable();
 
 	cprintLine(BLUE);
-	cprintf(CYAN, "\t Código Fonte: \n");
+	cprintf(TITLE2, "\t Código Fonte:");
+	printf("\n\n");
+
   	yyparse();
 
 	printf("\n");
 	cprintLine(YELLOW);
+	cprintf(TITLE3, "\t Resultado da compilação:");
+	printf("\n\n");
+
 	if (!hasError) {
 		cprintf(GREEN, "Trem de compilar rodô demais da conta!\nPrograma sintaticamente correto\n");
 		return 0;
@@ -2164,11 +2173,18 @@ int main(void) {
 }
 
 void yyerror(const char *str) {
-	cprintf(ERROR, " Uai sô... deu um pobrema: %s na linha %d \n", str, yylineno);
+	printf("\n");
+	cprintf(ERROR, "Uai sô... deu um pobrema: %s na linha %d", str, yylineno);
+	printf("\n\n");
+	cprintf(ERROR, "Cê quiria digitarr");
+	cprintf(ERROR2, " %s ", yytext);
+	cprintf(ERROR, "memo??");
+	printf("\n\n");
 	printf("Token problemático: ");
 	printResetColor();
 	printToken(yychar);
 	printResetColor();
+	printf("\n");
 	hasError = 1;
 }
 

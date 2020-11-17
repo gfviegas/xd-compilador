@@ -2,48 +2,58 @@
 
 void printToken(Token token) {
 	switch (token) {
-		case TOK_MODULE_START:
+		case MODULE_START:
 			return cprintf(YELLOW, "MODULE_START");
-		case TOK_MODULE_END:
+		case MODULE_END:
 			return cprintf(YELLOW, "MODULE_END");
-		case TOK_ASSIGN:
+		case ASSIGN:
 			return cprintf(YELLOW, "ASSIGN");
-		case TOK_DELIMITER:
+		case DELIMITER:
 			return cprintf(YELLOW, "DELIMITER");
-		case TOK_CONST:
+		case CONST:
 			return cprintf(YELLOW, "CONST");
-		case TOK_TYPE:
+		case TYPE:
 			return cprintf(YELLOW, "TYPE");
-		case TOK_IDENTIFIER:
+		case IDENTIFIER:
 			return cprintf(YELLOW, "IDENTIFIER");
-		case TOK_RELOP:
+		case RELOP:
 			return cprintf(YELLOW, "RELOP");
-		case TOK_MATHOP:
+		case MATHOP:
 			return cprintf(YELLOW, "MATHOP");
-		case TOK_NUMBER:
+		case NUMBER:
 			return cprintf(YELLOW, "NUMBER");
-		case TOK_BOOLEAN:
+		case BOOLEAN:
 			return cprintf(YELLOW, "BOOLEAN");
-		case TOK_RETURN:
+		case RETURN:
 			return cprintf(YELLOW, "RETURN");
-		case TOK_STRING:
+		case STRING:
 			return cprintf(YELLOW, "STRING");
-		case TOK_NIL:
+		case NIL:
 			return cprintf(YELLOW, "NIL");
-		case TOK_ATOM:
+		case ATOM:
 			return cprintf(YELLOW, "ATOM");
-		case TOK_IF:
+		case IF:
 			return cprintf(YELLOW, "IF");
-		case TOK_ELSE:
+		case ELSE:
 			return cprintf(YELLOW, "ELSE");
-		case TOK_IF_END:
+		case IF_END:
 			return cprintf(YELLOW, "IF_END");
-		case TOK_FUNC_START:
+		case FUNC_START:
 			return cprintf(YELLOW, "FUNC_START");
-		case TOK_FUNC_END:
+		case FUNC_END:
 			return cprintf(YELLOW, "FUNC_END");
-		case TOK_THEN:
+		case THEN:
 			return cprintf(YELLOW, "THEN");
+		case PARAN_OPEN:
+			return cprintf(YELLOW, "PARAN_OPEN");
+		case PARAN_CLOSE:
+			return cprintf(YELLOW, "PARAN_CLOSE");
+		case BRACK_OPEN:
+			return cprintf(YELLOW, "BRACK_OPEN");
+		case BRACK_CLOSE:
+			return cprintf(YELLOW, "BRACK_CLOSE");
+		case COMMA:
+			return cprintf(YELLOW, "COMMA");
 		default:
 			return cprintf(RED, "?????");
 	}
@@ -61,19 +71,40 @@ void printSourceCode(Lexeme lexeme, int lineNumber) {
 	cprintf(CYAN, "%s ", lexeme);
 }
 
-// void printTable(int startIndex) {
-// 	int lastSuccessful = 0;
-// 	int index = startIndex;
+void printTable(void) {
+	Token tokenList[26] = {
+		MODULE_START,
+		MODULE_END,
+		ASSIGN,
+		DELIMITER,
+		CONST,
+		TYPE,
+		IDENTIFIER,
+		RELOP,
+		MATHOP,
+		NUMBER,
+		BOOLEAN,
+		RETURN,
+		STRING,
+		NIL,
+		ATOM,
+		IF,
+		ELSE,
+		IF_END,
+		FUNC_START,
+		FUNC_END,
+		THEN,
+		PARAN_OPEN,
+		PARAN_CLOSE,
+		BRACK_OPEN,
+		BRACK_CLOSE,
+		COMMA,
+	};
 
-// 	while (lastSuccessful < 5) {
-// 		char *symbolName = yysymbol_name(index);
-
-// 		if (symbolName == NULL) {
-// 			lastSuccessful++;
-// 			continue;
-// 		}
-
-// 		printf("%s \n", symbolName);
-// 		lastSuccessful = 0;
-// 	}
-// }
+	for (int i = 0; i < 26; i++) {
+		cprintf(MAGENTA, "%d", tokenList[i]);
+		printf(" -> ");
+		printToken(tokenList[i]);
+		printf("\n");
+	}
+}

@@ -23,6 +23,10 @@
 #define ANSI_COLOR_ORANGE "\x1b[49;36m"
 #define ANSI_COLOR_RESET "\x1b[49;0m"
 #define ANSI_COLOR_ERROR "\033[37;41m"
+#define ANSI_COLOR_ERROR2 "\033[93;41m"
+#define ANSI_COLOR_TITLE1 "\033[33;45m"
+#define ANSI_COLOR_TITLE2 "\033[47;44m"
+#define ANSI_COLOR_TITLE3 "\033[30;43m"
 
 // Tamanho da linha a ser impressa diversas vezes
 #define LINE_SIZE 100
@@ -41,7 +45,11 @@ typedef enum AvailableColors
 	BLUE,	 // Azul
 	MAGENTA, // Magenta
 	CYAN,	 // Ciano
-	ERROR	 // Erro
+	ERROR,	 // Erro
+	ERROR2,	 // Erro 2
+	TITLE1,	 // Titulo 1
+	TITLE2,	 // Titulo 2
+	TITLE3	 // Titulo 3
 } AvailableColors;
 
 /**
@@ -69,5 +77,8 @@ void cprintLine(AvailableColors color);
 
 
 void printResetColor();
+
+
+void printFlag();
 
 #endif /* logger_h */

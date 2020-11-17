@@ -23,5 +23,7 @@ test3:
 	./build/lex-xd < resources/teste3.uai
 test4:
 	./build/lex-xd < resources/teste4.uai
+test5:
+	./build/lex-xd < resources/teste5.uai
 test:
 	./init.sh

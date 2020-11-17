@@ -13,8 +13,7 @@
 /**
  * Token da linguagem
  **/
-typedef enum Token
-{
+typedef enum Token {
 	MODULE_START = 258,
 	MODULE_END = 259,
 	ASSIGN = 260,
@@ -36,7 +35,6 @@ typedef enum Token
 	FUNC_START = 276,
 	FUNC_END = 277,
 	THEN = 278,
-
 	PARAN_OPEN = 279,
 	PARAN_CLOSE = 280,
 	BRACK_OPEN = 281,
@@ -59,5 +57,8 @@ void printToken(Token token);
 void printLineNumber(int lineNumber);
 
 void printSourceCode(Lexeme lexeme, int lineNumber);
+
+
+void printTable(void);
 
 #endif

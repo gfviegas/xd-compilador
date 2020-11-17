@@ -21,7 +21,12 @@ void cprintf(AvailableColors color, const char *fmt, ...) {
 		ANSI_COLOR_BLUE,
 		ANSI_COLOR_MAGENTA,
 		ANSI_COLOR_CYAN,
-		ANSI_COLOR_ERROR};
+		ANSI_COLOR_ERROR,
+		ANSI_COLOR_ERROR2,
+		ANSI_COLOR_TITLE1,
+		ANSI_COLOR_TITLE2,
+		ANSI_COLOR_TITLE3
+	};
 
 	char buffer[CPRINTF_BUFFER_LENGTH];
 	va_list args;
@@ -50,7 +55,12 @@ void cprintLine(AvailableColors color) {
 		ANSI_COLOR_BLUE,
 		ANSI_COLOR_MAGENTA,
 		ANSI_COLOR_CYAN,
-		ANSI_COLOR_ERROR};
+		ANSI_COLOR_ERROR,
+		ANSI_COLOR_ERROR2
+		ANSI_COLOR_TITLE1,
+		ANSI_COLOR_TITLE2,
+		ANSI_COLOR_TITLE3
+	};
 	printf("\n");
 
 	for (int i = 0; i < LINE_SIZE; i++)
@@ -61,4 +71,24 @@ void cprintLine(AvailableColors color) {
 
 void printResetColor() {
 	printf("%s %s", ANSI_COLOR_RESET, ANSI_COLOR_RESET);
+}
+
+void printFlag() {
+
+
+cprintf(RED, "\n                                                                                ");
+cprintf(RED, "\n                                       ###    @@                                 ");
+cprintf(RED, "\n                                 .@   ##### @.@                                 ");
+cprintf(RED, "\n                                %/*  #######    @                               ");
+cprintf(RED, "\n                               @   ###########  @&*                             ");
+cprintf(RED, "\n                            & &%  #############                                 ");
+cprintf(RED, "\n                           /    ################/ #                             ");
+cprintf(RED, "\n                         . @#  ################### * @                          ");
+cprintf(RED, "\n                         (,  *#####################  *. @                       ");
+cprintf(RED, "\n                        .(/ ######################### &@,@                      ");
+cprintf(RED, "\n                           ###########################                          ");
+cprintf(RED, "\n                         ###############################                        ");
+cprintf(RED, "\n                                                                                ");
+cprintf(RED, "\n                                    #%  (%.  . #                                                                                                                ");
+
 }
