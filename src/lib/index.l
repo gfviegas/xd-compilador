@@ -27,65 +27,69 @@ eol	       					\n
 /* Segunda parte: Pattern match! */
 %%
 {ws}    			{}
-{eol}    			{}
+{eol}    			{ printLineNumber(++yylineno); }
 {comment}    		{}
 
-"Nada"				{ return NIL; }
-"Vera"				{ return BOOLEAN; }
-"Bobagi"			{ return BOOLEAN; }
-"ingual"			{ return ASSIGN; }
+"Nada"				{ printSourceCode(yytext, yylineno); return NIL; }
+"Vera"				{ printSourceCode(yytext, yylineno); return BOOLEAN; }
+"Bobagi"			{ printSourceCode(yytext, yylineno); return BOOLEAN; }
+"ingual"			{ printSourceCode(yytext, yylineno); return ASSIGN; }
 
-"ingualzin"			{ return RELOP; }
-"nadavê com"		{ return RELOP; }
-"maió que"			{ return RELOP; }
-"menó que"			{ return RELOP; }
-"ou"				{ return RELOP; }
-"i"					{ return RELOP; }
+"ingualzin"			{ printSourceCode(yytext, yylineno); return RELOP; }
+"nadavê com"		{ printSourceCode(yytext, yylineno); return RELOP; }
+"maió que"			{ printSourceCode(yytext, yylineno); return RELOP; }
+"menó que"			{ printSourceCode(yytext, yylineno); return RELOP; }
+"ou"				{ printSourceCode(yytext, yylineno); return RELOP; }
+"i"					{ printSourceCode(yytext, yylineno); return RELOP; }
 
-"mais"				{ return MATHOP; }
-"menus"				{ return MATHOP; }
-"veiz"				{ return MATHOP; }
-"divididu"			{ return MATHOP; }
-"resto"				{ return MATHOP; }
-"elevado a"			{ return MATHOP; }
+"mais"				{ printSourceCode(yytext, yylineno); return MATHOP; }
+"menus"				{ printSourceCode(yytext, yylineno); return MATHOP; }
+"veiz"				{ printSourceCode(yytext, yylineno); return MATHOP; }
+"divididu"			{ printSourceCode(yytext, yylineno); return MATHOP; }
+"resto"				{ printSourceCode(yytext, yylineno); return MATHOP; }
+"elevado a"			{ printSourceCode(yytext, yylineno); return MATHOP; }
 
-"intao"				{ return THEN; }
-"intaotabao"		{ return IF_END; }
-"cêsabese"			{ return IF; }
-"sinao"				{ return ELSE; }
-"negocio"			{ return FUNC_START; }
-"tendeu"			{ return FUNC_END; }
-"assim"				{ return MODULE_START; }
-"cabô"				{ return MODULE_END; }
-"trem"				{ return CONST; }
-"desembucha"		{ return IDENTIFIER; }
-"devorve"			{ return RETURN; }
+"intao"				{ printSourceCode(yytext, yylineno); return THEN; }
+"intaotabao"		{ printSourceCode(yytext, yylineno); return IF_END; }
+"cêsabese"			{ printSourceCode(yytext, yylineno); return IF; }
+"sinao"				{ printSourceCode(yytext, yylineno); return ELSE; }
+"negocio"			{ printSourceCode(yytext, yylineno); return FUNC_START; }
+"tendeu"			{ printSourceCode(yytext, yylineno); return FUNC_END; }
+"assim"				{ printSourceCode(yytext, yylineno); return MODULE_START; }
+"cabô"				{ printSourceCode(yytext, yylineno); return MODULE_END; }
+"trem"				{ printSourceCode(yytext, yylineno); return CONST; }
+"desembucha"		{ printSourceCode(yytext, yylineno); return IDENTIFIER; }
+"devorve"			{ printSourceCode(yytext, yylineno); return RETURN; }
 
-"("					{ return PARAN_OPEN; }
-")"					{ return PARAN_CLOSE; }
-"["					{ return BRACK_OPEN; }
-"]"					{ return BRACK_CLOSE; }
-","					{ return COMMA; }
+"("					{ printSourceCode(yytext, yylineno); return PARAN_OPEN; }
+")"					{ printSourceCode(yytext, yylineno); return PARAN_CLOSE; }
+"["					{ printSourceCode(yytext, yylineno); return BRACK_OPEN; }
+"]"					{ printSourceCode(yytext, yylineno); return BRACK_CLOSE; }
+","					{ printSourceCode(yytext, yylineno); return COMMA; }
 
-{staticType}		{ return TYPE; }
-{integer}         	{ return NUMBER; }
-{float}         	{ return NUMBER; }
-"vazio"				{ return NIL; }
-{atom}         		{ return ATOM; }
-{string}         	{ return STRING; }
+{staticType}		{ printSourceCode(yytext, yylineno); return TYPE; }
+{integer}         	{ printSourceCode(yytext, yylineno); return NUMBER; }
+{float}         	{ printSourceCode(yytext, yylineno); return NUMBER; }
+"vazio"				{ printSourceCode(yytext, yylineno); return NIL; }
+{atom}         		{ printSourceCode(yytext, yylineno); return ATOM; }
+{string}         	{ printSourceCode(yytext, yylineno); return STRING; }
 
-"uai"				{ return DELIMITER; }
-{identifier}      	{ return IDENTIFIER; }
+"uai"				{ printSourceCode(yytext, yylineno); return DELIMITER; }
+{identifier}      	{ printSourceCode(yytext, yylineno); return IDENTIFIER; }
 
 
 %%
 /* Fim da segunda parte */
 /* Terceira parte: Código C */
-
-extern int yylineno, yychar;
-extern int hasError = 0;
+extern int yylineno, yychar, yydebug;
+int hasError = 0;
 
 int main(void) {
+	printf("\n%d\n", yytoken_kind_t.YYEMPTY);
+
+
+	cprintLine(BLUE);
+	cprintf(CYAN, "\t Código Fonte: \n");
   	yyparse();
 
 	printf("\n");

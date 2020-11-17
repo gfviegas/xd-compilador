@@ -14,12 +14,14 @@ $(TARGET): $(OBJFILES)
 clean:
 	rm -f $(TARGET) $(shell find . -name '*.h.gch') $(shell find . -name '*.o') $(shell find . -name '*.out') *~
 run:
-	./build/xd-compiler
+	./build/lex-xd
 test1:
-	./build/xd-compiler < resources/input.txt
+	./build/lex-xd < resources/teste.uai
 test2:
-	./build/xd-compiler < resources/input2.txt
+	./build/lex-xd < resources/teste2.uai
 test3:
-	./build/xd-compiler < resources/input3.txt
+	./build/lex-xd < resources/teste3.uai
+test4:
+	./build/lex-xd < resources/teste4.uai
 test:
 	./init.sh

@@ -2,49 +2,78 @@
 
 void printToken(Token token) {
 	switch (token) {
-		case MODULE_START:
+		case TOK_MODULE_START:
 			return cprintf(YELLOW, "MODULE_START");
-		case MODULE_END:
+		case TOK_MODULE_END:
 			return cprintf(YELLOW, "MODULE_END");
-		case ASSIGN:
+		case TOK_ASSIGN:
 			return cprintf(YELLOW, "ASSIGN");
-		case DELIMITER:
+		case TOK_DELIMITER:
 			return cprintf(YELLOW, "DELIMITER");
-		case CONST:
+		case TOK_CONST:
 			return cprintf(YELLOW, "CONST");
-		case TYPE:
+		case TOK_TYPE:
 			return cprintf(YELLOW, "TYPE");
-		case IDENTIFIER:
+		case TOK_IDENTIFIER:
 			return cprintf(YELLOW, "IDENTIFIER");
-		case RELOP:
+		case TOK_RELOP:
 			return cprintf(YELLOW, "RELOP");
-		case MATHOP:
+		case TOK_MATHOP:
 			return cprintf(YELLOW, "MATHOP");
-		case NUMBER:
+		case TOK_NUMBER:
 			return cprintf(YELLOW, "NUMBER");
-		case BOOLEAN:
+		case TOK_BOOLEAN:
 			return cprintf(YELLOW, "BOOLEAN");
-		case RETURN:
+		case TOK_RETURN:
 			return cprintf(YELLOW, "RETURN");
-		case STRING:
+		case TOK_STRING:
 			return cprintf(YELLOW, "STRING");
-		case NIL:
+		case TOK_NIL:
 			return cprintf(YELLOW, "NIL");
-		case ATOM:
+		case TOK_ATOM:
 			return cprintf(YELLOW, "ATOM");
-		case IF:
+		case TOK_IF:
 			return cprintf(YELLOW, "IF");
-		case ELSE:
+		case TOK_ELSE:
 			return cprintf(YELLOW, "ELSE");
-		case IF_END:
+		case TOK_IF_END:
 			return cprintf(YELLOW, "IF_END");
-		case FUNC_START:
+		case TOK_FUNC_START:
 			return cprintf(YELLOW, "FUNC_START");
-		case FUNC_END:
+		case TOK_FUNC_END:
 			return cprintf(YELLOW, "FUNC_END");
-		case THEN:
+		case TOK_THEN:
 			return cprintf(YELLOW, "THEN");
 		default:
 			return cprintf(RED, "?????");
 	}
 }
+
+void printLineNumber(int lineNumber) {
+	cprintf(BLUE, "\n%d) ", lineNumber);
+}
+
+void printSourceCode(Lexeme lexeme, int lineNumber) {
+	if (lineNumber == 1) {
+		printLineNumber(lineNumber);
+	}
+
+	cprintf(CYAN, "%s ", lexeme);
+}
+
+// void printTable(int startIndex) {
+// 	int lastSuccessful = 0;
+// 	int index = startIndex;
+
+// 	while (lastSuccessful < 5) {
+// 		char *symbolName = yysymbol_name(index);
+
+// 		if (symbolName == NULL) {
+// 			lastSuccessful++;
+// 			continue;
+// 		}
+
+// 		printf("%s \n", symbolName);
+// 		lastSuccessful = 0;
+// 	}
+// }

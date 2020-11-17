@@ -45,9 +45,19 @@ typedef enum Token
 } Token;
 
 /**
+ * Um lexema... basicamente uma string
+ **/
+typedef char *Lexeme;
+
+/**
  * Imprime a saída informando o token encontrado.
  *  @arg Token token
  */
 void printToken(Token token);
+
+
+void printLineNumber(int lineNumber);
+
+void printSourceCode(Lexeme lexeme, int lineNumber);
 
 #endif
