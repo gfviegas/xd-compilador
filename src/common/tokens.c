@@ -1,62 +1,98 @@
 #include "tokens.h"
 
-void printToken(Token token) {
+char* translateToken(Token token) {
 	switch (token) {
 		case MODULE_START:
-			return cprintf(YELLOW, "MODULE_START");
+			return "MODULE_START";
 		case MODULE_END:
-			return cprintf(YELLOW, "MODULE_END");
+			return "MODULE_END";
 		case ASSIGN:
-			return cprintf(YELLOW, "ASSIGN");
+			return "ASSIGN";
 		case DELIMITER:
-			return cprintf(YELLOW, "DELIMITER");
+			return "DELIMITER";
 		case CONST:
-			return cprintf(YELLOW, "CONST");
+			return "CONST";
 		case TYPE:
-			return cprintf(YELLOW, "TYPE");
+			return "TYPE";
 		case IDENTIFIER:
-			return cprintf(YELLOW, "IDENTIFIER");
+			return "IDENTIFIER";
 		case RELOP:
-			return cprintf(YELLOW, "RELOP");
+			return "RELOP";
 		case MATHOP:
-			return cprintf(YELLOW, "MATHOP");
+			return "MATHOP";
 		case NUMBER:
-			return cprintf(YELLOW, "NUMBER");
+			return "NUMBER";
 		case BOOLEAN:
-			return cprintf(YELLOW, "BOOLEAN");
+			return "BOOLEAN";
 		case RETURN:
-			return cprintf(YELLOW, "RETURN");
+			return "RETURN";
 		case STRING:
-			return cprintf(YELLOW, "STRING");
+			return "STRING";
 		case NIL:
-			return cprintf(YELLOW, "NIL");
+			return "NIL";
 		case ATOM:
-			return cprintf(YELLOW, "ATOM");
+			return "ATOM";
 		case IF:
-			return cprintf(YELLOW, "IF");
+			return "IF";
 		case ELSE:
-			return cprintf(YELLOW, "ELSE");
+			return "ELSE";
 		case IF_END:
-			return cprintf(YELLOW, "IF_END");
+			return "IF_END";
 		case FUNC_START:
-			return cprintf(YELLOW, "FUNC_START");
+			return "FUNC_START";
 		case FUNC_END:
-			return cprintf(YELLOW, "FUNC_END");
+			return "FUNC_END";
 		case THEN:
-			return cprintf(YELLOW, "THEN");
+			return "THEN";
 		case PARAN_OPEN:
-			return cprintf(YELLOW, "PARAN_OPEN");
+			return "PARAN_OPEN";
 		case PARAN_CLOSE:
-			return cprintf(YELLOW, "PARAN_CLOSE");
+			return "PARAN_CLOSE";
 		case BRACK_OPEN:
-			return cprintf(YELLOW, "BRACK_OPEN");
+			return "BRACK_OPEN";
 		case BRACK_CLOSE:
-			return cprintf(YELLOW, "BRACK_CLOSE");
+			return "BRACK_CLOSE";
 		case COMMA:
-			return cprintf(YELLOW, "COMMA");
+			return "COMMA";
 		default:
-			return cprintf(RED, "?????");
+			return "?????";
 	}
+}
+
+char* translateOperator(Operator operator) {
+	switch (operator) {
+		case RELOP_EQ:
+			return "Igualdade";
+		case RELOP_NE:
+			return "Não-Igual";
+		case RELOP_GT:
+			return "Maior que";
+		case RELOP_LT:
+			return "Menor que";
+		case RELOP_OR:
+			return "Ou lógico";
+		case RELOP_AND:
+			return "E lógico";
+		case MAHTOP_PLUS:
+			return "Soma";
+		case MAHTOP_MINUS:
+			return "Subtração";
+		case MAHTOP_MUL:
+			return "Multiplicação";
+		case MAHTOP_DIV:
+			return "Divisão";
+		case MAHTOP_MOD:
+			return "Módulo";
+		case MAHTOP_POW:
+			return "Potência";
+		default:
+			return "?????";
+	}
+}
+
+void printToken(Token token) {
+	char* tokenStr = translateToken(token);
+	return cprintf(YELLOW, tokenStr);
 }
 
 void printLineNumber(int lineNumber) {

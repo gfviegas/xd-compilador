@@ -1,8 +1,11 @@
 /* Primeira parte:  */
 %{
   #include <stdio.h>
-  #include "../common/tokens.h"
-//   #include "y.tab.h"
+  #include "../common/handler.c"
+
+  void yyerror(const char *str);
+  int yylex(void);
+  int yyparse(void);
 %}
 
 /* Definições regulares */
@@ -30,102 +33,63 @@ eol	       					\n
 {eol}    			{ printLineNumber(++yylineno); }
 {comment}    		{}
 
-"Nada"				{ printSourceCode(yytext, yylineno); return NIL; }
-"Vera"				{ printSourceCode(yytext, yylineno); return BOOLEAN; }
-"Bobagi"			{ printSourceCode(yytext, yylineno); return BOOLEAN; }
-"ingual"			{ printSourceCode(yytext, yylineno); return ASSIGN; }
+"Nada"				{ handleLex(yytext, yylineno, NIL, UNKNOWN_OPERATOR); }
+"Vera"				{ handleLex(yytext, yylineno, BOOLEAN, UNKNOWN_OPERATOR); }
+"Bobagi"			{ handleLex(yytext, yylineno, BOOLEAN, UNKNOWN_OPERATOR); }
+"ingual"			{ handleLex(yytext, yylineno, ASSIGN, UNKNOWN_OPERATOR); }
 
-"ingualzin"			{ printSourceCode(yytext, yylineno); return RELOP; }
-"nadavê com"		{ printSourceCode(yytext, yylineno); return RELOP; }
-"maió que"			{ printSourceCode(yytext, yylineno); return RELOP; }
-"menó que"			{ printSourceCode(yytext, yylineno); return RELOP; }
-"ou"				{ printSourceCode(yytext, yylineno); return RELOP; }
-"i"					{ printSourceCode(yytext, yylineno); return RELOP; }
+"ingualzin"			{ handleLex(yytext, yylineno, RELOP, RELOP_EQ); }
+"nadavê com"		{ handleLex(yytext, yylineno, RELOP, RELOP_NE); }
+"maió que"			{ handleLex(yytext, yylineno, RELOP, RELOP_GT); }
+"menó que"			{ handleLex(yytext, yylineno, RELOP, RELOP_LT); }
+"ou"				{ handleLex(yytext, yylineno, RELOP, RELOP_OR); }
+"i"					{ handleLex(yytext, yylineno, RELOP, RELOP_AND); }
 
-"mais"				{ printSourceCode(yytext, yylineno); return MATHOP; }
-"menus"				{ printSourceCode(yytext, yylineno); return MATHOP; }
-"veiz"				{ printSourceCode(yytext, yylineno); return MATHOP; }
-"divididu"			{ printSourceCode(yytext, yylineno); return MATHOP; }
-"resto"				{ printSourceCode(yytext, yylineno); return MATHOP; }
-"elevado a"			{ printSourceCode(yytext, yylineno); return MATHOP; }
+"mais"				{ handleLex(yytext, yylineno, MATHOP, MAHTOP_PLUS); }
+"menus"				{ handleLex(yytext, yylineno, MATHOP, MAHTOP_MINUS); }
+"veiz"				{ handleLex(yytext, yylineno, MATHOP, MAHTOP_MUL); }
+"divididu"			{ handleLex(yytext, yylineno, MATHOP, MAHTOP_DIV); }
+"resto"				{ handleLex(yytext, yylineno, MATHOP, MAHTOP_MOD); }
+"elevado a"			{ handleLex(yytext, yylineno, MATHOP, MAHTOP_POW); }
 
-"intao"				{ printSourceCode(yytext, yylineno); return THEN; }
-"intaotabao"		{ printSourceCode(yytext, yylineno); return IF_END; }
-"cêsabese"			{ printSourceCode(yytext, yylineno); return IF; }
-"sinao"				{ printSourceCode(yytext, yylineno); return ELSE; }
-"negocio"			{ printSourceCode(yytext, yylineno); return FUNC_START; }
-"tendeu"			{ printSourceCode(yytext, yylineno); return FUNC_END; }
-"assim"				{ printSourceCode(yytext, yylineno); return MODULE_START; }
-"cabô"				{ printSourceCode(yytext, yylineno); return MODULE_END; }
-"trem"				{ printSourceCode(yytext, yylineno); return CONST; }
-"desembucha"		{ printSourceCode(yytext, yylineno); return IDENTIFIER; }
-"devorve"			{ printSourceCode(yytext, yylineno); return RETURN; }
+"intao"				{ handleLex(yytext, yylineno, THEN, UNKNOWN_OPERATOR); }
+"intaotabao"		{ handleLex(yytext, yylineno, IF_END, UNKNOWN_OPERATOR); }
+"cêsabese"			{ handleLex(yytext, yylineno, IF, UNKNOWN_OPERATOR); }
+"sinao"				{ handleLex(yytext, yylineno, ELSE, UNKNOWN_OPERATOR); }
+"negocio"			{ handleLex(yytext, yylineno, FUNC_START, UNKNOWN_OPERATOR); }
+"tendeu"			{ handleLex(yytext, yylineno, FUNC_END, UNKNOWN_OPERATOR); }
+"assim"				{ handleLex(yytext, yylineno, MODULE_START, UNKNOWN_OPERATOR); }
+"cabô"				{ handleLex(yytext, yylineno, MODULE_END, UNKNOWN_OPERATOR); }
+"trem"				{ handleLex(yytext, yylineno, CONST, UNKNOWN_OPERATOR); }
+"desembucha"		{ handleLex(yytext, yylineno, IDENTIFIER, UNKNOWN_OPERATOR); }
+"devorve"			{ handleLex(yytext, yylineno, RETURN, UNKNOWN_OPERATOR); }
 
-"("					{ printSourceCode(yytext, yylineno); return PARAN_OPEN; }
-")"					{ printSourceCode(yytext, yylineno); return PARAN_CLOSE; }
-"["					{ printSourceCode(yytext, yylineno); return BRACK_OPEN; }
-"]"					{ printSourceCode(yytext, yylineno); return BRACK_CLOSE; }
-","					{ printSourceCode(yytext, yylineno); return COMMA; }
+"("					{ handleLex(yytext, yylineno, PARAN_OPEN, UNKNOWN_OPERATOR); }
+")"					{ handleLex(yytext, yylineno, PARAN_CLOSE, UNKNOWN_OPERATOR); }
+"["					{ handleLex(yytext, yylineno, BRACK_OPEN, UNKNOWN_OPERATOR); }
+"]"					{ handleLex(yytext, yylineno, BRACK_CLOSE, UNKNOWN_OPERATOR); }
+","					{ handleLex(yytext, yylineno, COMMA, UNKNOWN_OPERATOR); }
 
-{staticType}		{ printSourceCode(yytext, yylineno); return TYPE; }
-{integer}         	{ printSourceCode(yytext, yylineno); return NUMBER; }
-{float}         	{ printSourceCode(yytext, yylineno); return NUMBER; }
-"vazio"				{ printSourceCode(yytext, yylineno); return NIL; }
-{atom}         		{ printSourceCode(yytext, yylineno); return ATOM; }
-{string}         	{ printSourceCode(yytext, yylineno); return STRING; }
+{staticType}		{ handleLex(yytext, yylineno, TYPE, UNKNOWN_OPERATOR); }
+{integer}         	{ handleLex(yytext, yylineno, NUMBER, UNKNOWN_OPERATOR); }
+{float}         	{ handleLex(yytext, yylineno, NUMBER, UNKNOWN_OPERATOR); }
+"vazio"				{ handleLex(yytext, yylineno, NIL, UNKNOWN_OPERATOR); }
+{atom}         		{ handleLex(yytext, yylineno, ATOM, UNKNOWN_OPERATOR); }
+{string}         	{ handleLex(yytext, yylineno, STRING, UNKNOWN_OPERATOR); }
 
-"uai"				{ printSourceCode(yytext, yylineno); return DELIMITER; }
-{identifier}      	{ printSourceCode(yytext, yylineno); return IDENTIFIER; }
+"uai"				{ handleLex(yytext, yylineno, DELIMITER, UNKNOWN_OPERATOR); }
+{identifier}      	{ handleLex(yytext, yylineno, IDENTIFIER, UNKNOWN_OPERATOR); }
 
 
 %%
 /* Fim da segunda parte */
 /* Terceira parte: Código C */
-extern int yylineno, yychar, yydebug;
-int hasError = 0;
-
 int main(void) {
-	printFlag();
-
-	cprintLine(MAGENTA);
-	cprintf(TITLE1, "\t Tabela de Tokens:");
-	printf("\n\n");
-	printTable();
-
-	cprintLine(BLUE);
-	cprintf(TITLE2, "\t Código Fonte:");
-	printf("\n\n");
-
-  	yyparse();
-
-	printf("\n");
-	cprintLine(YELLOW);
-	cprintf(TITLE3, "\t Resultado da compilação:");
-	printf("\n\n");
-
-	if (!hasError) {
-		cprintf(GREEN, "Trem de compilar rodô demais da conta!\nPrograma sintaticamente correto\n");
-		return 0;
-	}
-
-	cprintf(RED, "Trem de compilar deu ruim!\nPrograma sintaticamente incorreto!\n");
-  	return 0;
+	return run();
 }
 
 void yyerror(const char *str) {
-	printf("\n");
-	cprintf(ERROR, "Uai sô... deu um pobrema: %s na linha %d", str, yylineno);
-	printf("\n\n");
-	cprintf(ERROR, "Cê quiria digitarr");
-	cprintf(ERROR2, " %s ", yytext);
-	cprintf(ERROR, "memo??");
-	printf("\n\n");
-	printf("Token problemático: ");
-	printResetColor();
-	printToken(yychar);
-	printResetColor();
-	printf("\n");
-	hasError = 1;
+	handleError(str);
 }
 
 int yywrap() {

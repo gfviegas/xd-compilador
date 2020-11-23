@@ -14,6 +14,7 @@
  * Token da linguagem
  **/
 typedef enum Token {
+	UNKNOWN_TOKEN = -1,
 	MODULE_START = 258,
 	MODULE_END = 259,
 	ASSIGN = 260,
@@ -42,22 +43,40 @@ typedef enum Token {
 	COMMA = 283
 } Token;
 
+typedef enum Operator {
+	UNKNOWN_OPERATOR = -1,
+	RELOP_EQ,
+	RELOP_NE,
+	RELOP_GT,
+	RELOP_LT,
+	RELOP_OR,
+	RELOP_AND,
+
+	MAHTOP_PLUS,
+	MAHTOP_MINUS,
+	MAHTOP_MUL,
+	MAHTOP_DIV,
+	MAHTOP_MOD,
+	MAHTOP_POW
+} Operator;
+
 /**
  * Um lexema... basicamente uma string
  **/
 typedef char *Lexeme;
 
-/**
+char *translateToken(Token token);
+char *translateOperator(Operator operator);
+
+	/**
  * Imprime a saída informando o token encontrado.
  *  @arg Token token
  */
-void printToken(Token token);
-
+	void printToken(Token token);
 
 void printLineNumber(int lineNumber);
 
 void printSourceCode(Lexeme lexeme, int lineNumber);
-
 
 void printTable(void);
 
