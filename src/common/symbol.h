@@ -9,7 +9,6 @@
 
 #include <stdlib.h>
 #include "tokens.h"
-#include "logger.h"
 
 typedef struct Symbol* SymbolPointer;
 typedef struct Symbol {

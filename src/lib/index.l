@@ -3,9 +3,7 @@
   #include <stdio.h>
   #include "../common/handler.c"
 
-  void yyerror(const char *str);
   int yylex(void);
-  int yyparse(void);
 %}
 
 /* Definições regulares */

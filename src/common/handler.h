@@ -24,4 +24,9 @@ void handleError(const char *str);
 
 Token handleLex(Lexeme lexeme, int lineNumber, Token token, Operator op);
 
+// Coisas do Lex/Yacc
+void yyerror(const char *str);
+int yylex(void);
+int yyparse(void);
+
 #endif
