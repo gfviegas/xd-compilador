@@ -89,11 +89,11 @@ void displaySymbolTable(SymbolTablePointer table) {
 	SymbolPointer currentSymbol = table->next;
 
 	cprintLine(BLUE);
-	cprintf(BLUE, "\t Imprimindo Tabela de Símbolos (%d entradas)", table->amount);
+	cprintf(BLUE, "\t Imprimindo Tabela de Símbolos (%d entradas)\n", table->amount);
 	cprintf(BLUE, "%3s | %20s | %20s | %30s", "ID", "Token", "Operator", "Lexema");
 	cprintLine(BLUE);
 
-	while (currentSymbol->next != NULL) {
+	while (currentSymbol != NULL) {
 		char* tokenStr = translateToken(currentSymbol->token);
 		char *opStr = translateOperator(currentSymbol->op);
 

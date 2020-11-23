@@ -2,7 +2,7 @@
 
 int run(void) {
 	STable = initSymbolTable();
-	printFlag();
+	// printFlag();
 
 	cprintLine(MAGENTA);
 	cprintf(TITLE1, "\t Tabela de Tokens:");
