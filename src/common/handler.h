@@ -13,7 +13,7 @@ extern int yylineno, yychar, yydebug, yylval;
 extern char* yytext;
 
 int hasError = 0;
-SymbolTablePointer STable = initSymbolTable();
+SymbolTablePointer STable;
 
 /**
  * Script principal

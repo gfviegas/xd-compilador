@@ -25,7 +25,9 @@ typedef struct SymbolTable {
 } SymbolTable;
 
 
-SymbolTablePointer initSymbolTable(void);
+SymbolTablePointer createSymbolTable(void);
+
+void initSymbolTable(SymbolTablePointer *table);
 
 SymbolPointer createSymbol(Token token, Lexeme lexeme, Operator op);
 

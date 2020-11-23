@@ -1,7 +1,14 @@
 #include "handler.h"
 
 int run(void) {
-	STable = initSymbolTable();
+	initSymbolTable(&STable);
+	if (STable == NULL) {
+		cprintf(ERROR2, "Tabela de Símbolos retornou NULL");
+		printf("\n\n");
+		return -1;
+	}
+
+	printf("Tabela: %p\n", STable);
 	// printFlag();
 
 	cprintLine(MAGENTA);

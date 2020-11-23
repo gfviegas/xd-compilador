@@ -1,6 +1,6 @@
 #include "symbol.h"
 
-SymbolTablePointer initSymbolTable(void) {
+SymbolTablePointer createSymbolTable(void) {
 	SymbolTablePointer table = malloc(sizeof(SymbolTable));
 
 	if (!table) return NULL;
@@ -8,6 +8,15 @@ SymbolTablePointer initSymbolTable(void) {
 	table->next = NULL;
 	table->amount = 0;
 	return table;
+}
+
+void initSymbolTable(SymbolTablePointer *table) {
+	*table = malloc(sizeof(SymbolTable));
+
+	if (!(*table)) return;
+
+	(*table)->next = NULL;
+	(*table)->amount = 0;
 }
 
 SymbolPointer createSymbol(Token token, Lexeme lexeme, Operator op) {
@@ -88,20 +97,17 @@ void displaySymbolTable(SymbolTablePointer table) {
 	int id = 1;
 	SymbolPointer currentSymbol = table->next;
 
-	cprintLine(BLUE);
-	cprintf(BLUE, "\t Imprimindo Tabela de Símbolos (%d entradas)\n", table->amount);
-	cprintf(BLUE, "%3s | %20s | %20s | %30s", "ID", "Token", "Operator", "Lexema");
-	cprintLine(BLUE);
+	cprintf(CYAN, "\t Imprimindo Tabela de Símbolos (%d entradas)\n", table->amount);
+	cprintf(CYAN, "%3s | %20s | %20s | %30s", "ID", "Token", "Operator", "Lexema");
+	cprintLine(CYAN);
 
 	while (currentSymbol != NULL) {
 		char* tokenStr = translateToken(currentSymbol->token);
 		char *opStr = translateOperator(currentSymbol->op);
 
-		cprintf(CYAN, "%3s | %20s | %20s | %30s", id, tokenStr, opStr, currentSymbol->lexeme);
+		cprintf(BLUE, "%3s | %20s | %20s | %30s", id, tokenStr, opStr, currentSymbol->lexeme);
 
 		currentSymbol = currentSymbol->next;
 		id += 1;
 	}
-
-	cprintLine(BLUE);
 }
