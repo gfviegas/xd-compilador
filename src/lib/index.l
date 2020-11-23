@@ -1,6 +1,7 @@
 /* Primeira parte:  */
 %{
   #include <stdio.h>
+  #include "../common/symbol.c"
   #include "../common/handler.c"
 
   int yylex(void);

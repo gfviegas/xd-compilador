@@ -625,15 +625,16 @@ char *yytext;
 /* Primeira parte:  */
 #line 3 "index.l"
   #include <stdio.h>
+  #include "../common/symbol.c"
   #include "../common/handler.c"
 
   int yylex(void);
-#line 631 "lex.c"
+#line 632 "lex.c"
 /* Definições regulares */
 /*boolean              		(Vera|Bobagi)*/
 /* Fim da primeira parte */
 /* Segunda parte: Pattern match! */
-#line 636 "lex.c"
+#line 637 "lex.c"
 
 #define INITIAL 0
 
@@ -850,9 +851,9 @@ YY_DECL
 		}
 
 	{
-#line 29 "index.l"
+#line 30 "index.l"
 
-#line 855 "lex.c"
+#line 856 "lex.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -911,13 +912,13 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 30 "index.l"
+#line 31 "index.l"
 {}
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 31 "index.l"
+#line 32 "index.l"
 { printLineNumber(++yylineno); }
 	YY_BREAK
 case 3:
@@ -925,215 +926,215 @@ case 3:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 32 "index.l"
+#line 33 "index.l"
 {}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 34 "index.l"
+#line 35 "index.l"
 { handleLex(yytext, yylineno, NIL, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 35 "index.l"
+#line 36 "index.l"
 { handleLex(yytext, yylineno, BOOLEAN, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 36 "index.l"
+#line 37 "index.l"
 { handleLex(yytext, yylineno, BOOLEAN, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 37 "index.l"
+#line 38 "index.l"
 { handleLex(yytext, yylineno, ASSIGN, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 39 "index.l"
+#line 40 "index.l"
 { handleLex(yytext, yylineno, RELOP, RELOP_EQ); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 40 "index.l"
+#line 41 "index.l"
 { handleLex(yytext, yylineno, RELOP, RELOP_NE); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 41 "index.l"
+#line 42 "index.l"
 { handleLex(yytext, yylineno, RELOP, RELOP_GT); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 42 "index.l"
+#line 43 "index.l"
 { handleLex(yytext, yylineno, RELOP, RELOP_LT); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 43 "index.l"
+#line 44 "index.l"
 { handleLex(yytext, yylineno, RELOP, RELOP_OR); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 44 "index.l"
+#line 45 "index.l"
 { handleLex(yytext, yylineno, RELOP, RELOP_AND); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 46 "index.l"
+#line 47 "index.l"
 { handleLex(yytext, yylineno, MATHOP, MAHTOP_PLUS); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 47 "index.l"
+#line 48 "index.l"
 { handleLex(yytext, yylineno, MATHOP, MAHTOP_MINUS); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 48 "index.l"
+#line 49 "index.l"
 { handleLex(yytext, yylineno, MATHOP, MAHTOP_MUL); }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 49 "index.l"
+#line 50 "index.l"
 { handleLex(yytext, yylineno, MATHOP, MAHTOP_DIV); }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 50 "index.l"
+#line 51 "index.l"
 { handleLex(yytext, yylineno, MATHOP, MAHTOP_MOD); }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 51 "index.l"
+#line 52 "index.l"
 { handleLex(yytext, yylineno, MATHOP, MAHTOP_POW); }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 53 "index.l"
+#line 54 "index.l"
 { handleLex(yytext, yylineno, THEN, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 54 "index.l"
+#line 55 "index.l"
 { handleLex(yytext, yylineno, IF_END, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 55 "index.l"
+#line 56 "index.l"
 { handleLex(yytext, yylineno, IF, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 56 "index.l"
+#line 57 "index.l"
 { handleLex(yytext, yylineno, ELSE, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 57 "index.l"
+#line 58 "index.l"
 { handleLex(yytext, yylineno, FUNC_START, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 58 "index.l"
+#line 59 "index.l"
 { handleLex(yytext, yylineno, FUNC_END, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 59 "index.l"
+#line 60 "index.l"
 { handleLex(yytext, yylineno, MODULE_START, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 60 "index.l"
+#line 61 "index.l"
 { handleLex(yytext, yylineno, MODULE_END, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 61 "index.l"
+#line 62 "index.l"
 { handleLex(yytext, yylineno, CONST, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 62 "index.l"
+#line 63 "index.l"
 { handleLex(yytext, yylineno, IDENTIFIER, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 63 "index.l"
+#line 64 "index.l"
 { handleLex(yytext, yylineno, RETURN, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 65 "index.l"
+#line 66 "index.l"
 { handleLex(yytext, yylineno, PARAN_OPEN, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 66 "index.l"
+#line 67 "index.l"
 { handleLex(yytext, yylineno, PARAN_CLOSE, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 67 "index.l"
+#line 68 "index.l"
 { handleLex(yytext, yylineno, BRACK_OPEN, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 68 "index.l"
+#line 69 "index.l"
 { handleLex(yytext, yylineno, BRACK_CLOSE, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 69 "index.l"
+#line 70 "index.l"
 { handleLex(yytext, yylineno, COMMA, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 71 "index.l"
+#line 72 "index.l"
 { handleLex(yytext, yylineno, TYPE, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 72 "index.l"
+#line 73 "index.l"
 { handleLex(yytext, yylineno, NUMBER, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 73 "index.l"
+#line 74 "index.l"
 { handleLex(yytext, yylineno, NUMBER, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 74 "index.l"
+#line 75 "index.l"
 { handleLex(yytext, yylineno, NIL, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 75 "index.l"
+#line 76 "index.l"
 { handleLex(yytext, yylineno, ATOM, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 76 "index.l"
+#line 77 "index.l"
 { handleLex(yytext, yylineno, STRING, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 78 "index.l"
+#line 79 "index.l"
 { handleLex(yytext, yylineno, DELIMITER, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 79 "index.l"
+#line 80 "index.l"
 { handleLex(yytext, yylineno, IDENTIFIER, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 82 "index.l"
+#line 83 "index.l"
 ECHO;
 	YY_BREAK
-#line 1136 "lex.c"
+#line 1137 "lex.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2138,7 +2139,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 82 "index.l"
+#line 83 "index.l"
 
 /* Fim da segunda parte */
 /* Terceira parte: Código C */
