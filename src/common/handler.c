@@ -11,16 +11,16 @@ int run(void) {
 	printf("Tabela: %p\n", STable);
 	// printFlag();
 
-	cprintLine(MAGENTA);
-	cprintf(TITLE1, "\t Tabela de Tokens:");
-	printf("\n\n");
-	displaySymbolTable(STable);
-
 	cprintLine(BLUE);
 	cprintf(TITLE2, "\t Código Fonte:");
 	printf("\n\n");
 
 	yyparse();
+
+	cprintLine(MAGENTA);
+	cprintf(TITLE1, "\t Tabela de Tokens:");
+	printf("\n\n");
+	displaySymbolTable(STable);
 
 	printf("\n");
 	cprintLine(YELLOW);

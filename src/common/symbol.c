@@ -1,4 +1,5 @@
 #include "symbol.h"
+#include <string.h>
 
 SymbolTablePointer createSymbolTable(void) {
 	SymbolTablePointer table = malloc(sizeof(SymbolTable));
@@ -11,7 +12,7 @@ SymbolTablePointer createSymbolTable(void) {
 }
 
 void initSymbolTable(SymbolTablePointer *table) {
-	*table = malloc(sizeof(SymbolTable));
+	*table = (SymbolTablePointer) malloc(sizeof(SymbolTable));
 
 	if (!(*table)) return;
 
@@ -20,7 +21,7 @@ void initSymbolTable(SymbolTablePointer *table) {
 }
 
 SymbolPointer createSymbol(Token token, Lexeme lexeme, Operator op) {
-	SymbolPointer symbol = malloc(sizeof(Symbol));
+	SymbolPointer symbol = (SymbolPointer) malloc(sizeof(Symbol));
 
 	if (!symbol) return NULL;
 
@@ -102,10 +103,10 @@ void displaySymbolTable(SymbolTablePointer table) {
 	cprintLine(CYAN);
 
 	while (currentSymbol != NULL) {
-		char* tokenStr = translateToken(currentSymbol->token);
+		char *tokenStr = translateToken(currentSymbol->token);
 		char *opStr = translateOperator(currentSymbol->op);
 
-		cprintf(BLUE, "%3s | %20s | %20s | %30s", id, tokenStr, opStr, currentSymbol->lexeme);
+		cprintf(BLUE, "%3d | %20s | %20s | %30s\n", id, tokenStr, opStr, currentSymbol->lexeme);
 
 		currentSymbol = currentSymbol->next;
 		id += 1;

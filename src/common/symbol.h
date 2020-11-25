@@ -1,5 +1,5 @@
 /**
- * Define a tabela de simples e funções de acesso, inserção e remoção.
+ * Define a tabela de símbolos e funções de acesso, inserção e remoção.
  * @author Gustavo Viegas (3026)
  *
  **/

@@ -86,7 +86,7 @@ char* translateOperator(Operator operator) {
 		case MAHTOP_POW:
 			return "Potência";
 		default:
-			return "?????";
+			return "NONE";
 	}
 }
 
