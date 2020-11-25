@@ -98,9 +98,9 @@ void displaySymbolTable(SymbolTablePointer table) {
 	int id = 1;
 	SymbolPointer currentSymbol = table->next;
 
-	cprintf(CYAN, "\t Imprimindo Tabela de Símbolos (%d entradas)\n", table->amount);
-	cprintf(CYAN, "%3s | %20s | %20s | %30s", "ID", "Token", "Operator", "Lexema");
-	cprintLine(CYAN);
+	cprintf(MAGENTA, "\t %d entradas\n", table->amount);
+	cprintf(MAGENTA, "%3s | %20s | %20s | %30s", "ID", "Token", "Operator", "Lexema");
+	cprintLine(MAGENTA);
 
 	while (currentSymbol != NULL) {
 		char *tokenStr = translateToken(currentSymbol->token);

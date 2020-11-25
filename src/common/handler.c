@@ -50,7 +50,7 @@ void handleError(const char *str) {
 	cprintf(ERROR, "Uai sô... deu um pobrema: %s na linha %d", str, yylineno);
 	printf("\n\n");
 	cprintf(ERROR, "Cê quiria digitarr");
-	cprintf(ERROR2, " %s ", yytext);
+	cprintf(ERROR2, " '%s' ", yytext);
 	cprintf(ERROR, "memo??");
 	printf("\n\n");
 	printf("Token problemático: ");
