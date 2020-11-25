@@ -932,202 +932,202 @@ YY_RULE_SETUP
 case 4:
 YY_RULE_SETUP
 #line 35 "index.l"
-{ handleLex(yytext, yylineno, NIL, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, NIL, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 36 "index.l"
-{ handleLex(yytext, yylineno, BOOLEAN, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, BOOLEAN, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
 #line 37 "index.l"
-{ handleLex(yytext, yylineno, BOOLEAN, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, BOOLEAN, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 38 "index.l"
-{ handleLex(yytext, yylineno, ASSIGN, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, ASSIGN, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 40 "index.l"
-{ handleLex(yytext, yylineno, RELOP, RELOP_EQ); }
+{ handleLex(strdup(yytext), yylineno, RELOP, RELOP_EQ); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 41 "index.l"
-{ handleLex(yytext, yylineno, RELOP, RELOP_NE); }
+{ handleLex(strdup(yytext), yylineno, RELOP, RELOP_NE); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 42 "index.l"
-{ handleLex(yytext, yylineno, RELOP, RELOP_GT); }
+{ handleLex(strdup(yytext), yylineno, RELOP, RELOP_GT); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 43 "index.l"
-{ handleLex(yytext, yylineno, RELOP, RELOP_LT); }
+{ handleLex(strdup(yytext), yylineno, RELOP, RELOP_LT); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 44 "index.l"
-{ handleLex(yytext, yylineno, RELOP, RELOP_OR); }
+{ handleLex(strdup(yytext), yylineno, RELOP, RELOP_OR); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 45 "index.l"
-{ handleLex(yytext, yylineno, RELOP, RELOP_AND); }
+{ handleLex(strdup(yytext), yylineno, RELOP, RELOP_AND); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 47 "index.l"
-{ handleLex(yytext, yylineno, MATHOP, MAHTOP_PLUS); }
+{ handleLex(strdup(yytext), yylineno, MATHOP, MAHTOP_PLUS); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
 #line 48 "index.l"
-{ handleLex(yytext, yylineno, MATHOP, MAHTOP_MINUS); }
+{ handleLex(strdup(yytext), yylineno, MATHOP, MAHTOP_MINUS); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 49 "index.l"
-{ handleLex(yytext, yylineno, MATHOP, MAHTOP_MUL); }
+{ handleLex(strdup(yytext), yylineno, MATHOP, MAHTOP_MUL); }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 50 "index.l"
-{ handleLex(yytext, yylineno, MATHOP, MAHTOP_DIV); }
+{ handleLex(strdup(yytext), yylineno, MATHOP, MAHTOP_DIV); }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
 #line 51 "index.l"
-{ handleLex(yytext, yylineno, MATHOP, MAHTOP_MOD); }
+{ handleLex(strdup(yytext), yylineno, MATHOP, MAHTOP_MOD); }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
 #line 52 "index.l"
-{ handleLex(yytext, yylineno, MATHOP, MAHTOP_POW); }
+{ handleLex(strdup(yytext), yylineno, MATHOP, MAHTOP_POW); }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
 #line 54 "index.l"
-{ handleLex(yytext, yylineno, THEN, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, THEN, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
 #line 55 "index.l"
-{ handleLex(yytext, yylineno, IF_END, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, IF_END, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
 #line 56 "index.l"
-{ handleLex(yytext, yylineno, IF, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, IF, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
 #line 57 "index.l"
-{ handleLex(yytext, yylineno, ELSE, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, ELSE, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
 #line 58 "index.l"
-{ handleLex(yytext, yylineno, FUNC_START, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, FUNC_START, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
 #line 59 "index.l"
-{ handleLex(yytext, yylineno, FUNC_END, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, FUNC_END, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
 #line 60 "index.l"
-{ handleLex(yytext, yylineno, MODULE_START, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, MODULE_START, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
 #line 61 "index.l"
-{ handleLex(yytext, yylineno, MODULE_END, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, MODULE_END, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
 #line 62 "index.l"
-{ handleLex(yytext, yylineno, CONST, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, CONST, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
 #line 63 "index.l"
-{ handleLex(yytext, yylineno, IDENTIFIER, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, IDENTIFIER, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
 #line 64 "index.l"
-{ handleLex(yytext, yylineno, RETURN, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, RETURN, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
 #line 66 "index.l"
-{ handleLex(yytext, yylineno, PARAN_OPEN, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, PARAN_OPEN, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
 #line 67 "index.l"
-{ handleLex(yytext, yylineno, PARAN_CLOSE, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, PARAN_CLOSE, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
 #line 68 "index.l"
-{ handleLex(yytext, yylineno, BRACK_OPEN, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, BRACK_OPEN, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
 #line 69 "index.l"
-{ handleLex(yytext, yylineno, BRACK_CLOSE, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, BRACK_CLOSE, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
 #line 70 "index.l"
-{ handleLex(yytext, yylineno, COMMA, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, COMMA, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
 #line 72 "index.l"
-{ handleLex(yytext, yylineno, TYPE, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, TYPE, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
 #line 73 "index.l"
-{ handleLex(yytext, yylineno, NUMBER, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, NUMBER, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
 #line 74 "index.l"
-{ handleLex(yytext, yylineno, NUMBER, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, NUMBER, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
 #line 75 "index.l"
-{ handleLex(yytext, yylineno, NIL, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, NIL, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
 #line 76 "index.l"
-{ handleLex(yytext, yylineno, ATOM, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, ATOM, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
 #line 77 "index.l"
-{ handleLex(yytext, yylineno, STRING, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, STRING, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
 #line 79 "index.l"
-{ handleLex(yytext, yylineno, DELIMITER, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, DELIMITER, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
 #line 80 "index.l"
-{ handleLex(yytext, yylineno, IDENTIFIER, UNKNOWN_OPERATOR); }
+{ handleLex(strdup(yytext), yylineno, IDENTIFIER, UNKNOWN_OPERATOR); }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
