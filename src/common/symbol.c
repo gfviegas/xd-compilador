@@ -20,21 +20,20 @@ void initSymbolTable(SymbolTablePointer *table) {
 	(*table)->amount = 0;
 }
 
-SymbolPointer createSymbol(Token token, Lexeme lexeme, Operator op) {
+SymbolPointer createSymbol(Lexeme lexeme, IDType type) {
 	SymbolPointer symbol = (SymbolPointer) malloc(sizeof(Symbol));
 
 	if (!symbol) return NULL;
 
-	symbol->token = token;
 	symbol->lexeme = lexeme;
-	symbol->op = op;
+	symbol->type = type;
 	symbol->next = NULL;
 
 	return symbol;
 }
 
-void addToSymbolTable(SymbolTablePointer table, Token token, Lexeme lexeme, Operator op) {
-	SymbolPointer symbol = createSymbol(token, lexeme, op);
+void addToSymbolTable(SymbolTablePointer table, Lexeme lexeme, IDType type) {
+	SymbolPointer symbol = createSymbol(lexeme, type);
 
 	if (table->amount == 0) {
 		table->next = symbol;
@@ -52,18 +51,18 @@ void addToSymbolTable(SymbolTablePointer table, Token token, Lexeme lexeme, Oper
 	return;
 }
 
-SymbolPointer getSymbol(SymbolTablePointer table, int index) {
+SymbolPointer getSymbol(SymbolTablePointer table, Lexeme lexeme) {
 	if (table == NULL) return NULL;
 
 	SymbolPointer currentSymbol = table->next;
-	if (currentSymbol == NULL) return NULL;
 
-	for (int i = 0; i < index; i++) {
-		if (currentSymbol == NULL) return NULL;
+	while (currentSymbol != NULL) {
+		if (strcmp(currentSymbol->lexeme, lexeme) == 0) return currentSymbol;
+
 		currentSymbol = currentSymbol->next;
 	}
 
-	return currentSymbol;
+	return NULL;
 }
 
 void removeFromSymbolTable(SymbolTablePointer table, int index) {
@@ -99,14 +98,13 @@ void displaySymbolTable(SymbolTablePointer table) {
 	SymbolPointer currentSymbol = table->next;
 
 	cprintf(MAGENTA, "\t %d entradas\n", table->amount);
-	cprintf(MAGENTA, "%3s | %20s | %20s | %30s", "ID", "Token", "Operator", "Lexema");
+	cprintf(MAGENTA, "%3s | %20s | %30s", "ID", "Tipo", "Lexema");
 	cprintLine(MAGENTA);
 
 	while (currentSymbol != NULL) {
-		char *tokenStr = translateToken(currentSymbol->token);
-		char *opStr = translateOperator(currentSymbol->op);
+		char *typeStr = translateIDType(currentSymbol->type);
 
-		cprintf(BLUE, "%3d | %20s | %20s | %30s\n", id, tokenStr, opStr, currentSymbol->lexeme);
+		cprintf(BLUE, "%3d | %20s | %30s\n", id, typeStr, currentSymbol->lexeme);
 
 		currentSymbol = currentSymbol->next;
 		id += 1;

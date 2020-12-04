@@ -17,7 +17,7 @@ decimal         			[0-9]+
 hexadecimal     			0X({digit}|[A-Fa-f])*
 integer                		{hexadecimal}|{decimal}
 float                 		[0-9]+(([Ee][+]([0-9]+))*|[.][0-9]+|[.][0-9]*[Ee][+][0-9]+)
-atom						:{downcaseLetter}+
+atom						\:{downcaseLetter}+
 string                 		["'].*["']
 comment      				#.*$
 identifier             		{letter}+({upcaseLetter}{downcaseLetter}*)*
@@ -69,7 +69,22 @@ eol	       					\n
 "]"					{ return handleLex(strdup(yytext), yylineno, BRACK_CLOSE, UNKNOWN_OPERATOR); }
 ","					{ return handleLex(strdup(yytext), yylineno, COMMA, UNKNOWN_OPERATOR); }
 
-{staticType}		{ return handleLex(strdup(yytext), yylineno, TYPE, UNKNOWN_OPERATOR); }
+"Numero"			{ return handleLex(strdup(yytext), yylineno, TYPE, INT_ID_TYPE); }
+"NumeroQuebrado"	{ return handleLex(strdup(yytext), yylineno, TYPE, FLOAT_ID_TYPE); }
+"Letra"				{ return handleLex(strdup(yytext), yylineno, TYPE, CHAR_ID_TYPE); }
+"Palavra"			{ return handleLex(strdup(yytext), yylineno, TYPE, STRING_ID_TYPE); }
+"ZeriUm"			{ return handleLex(strdup(yytext), yylineno, TYPE, BINARY_ID_TYPE); }
+"ÉOuNumÉ"			{ return handleLex(strdup(yytext), yylineno, TYPE, BOOLEAN_ID_TYPE); }
+"Bolota"			{ return handleLex(strdup(yytext), yylineno, TYPE, ATOM_ID_TYPE); }
+"Lista"				{ return handleLex(strdup(yytext), yylineno, TYPE, ARRAY_ID_TYPE); }
+"Vetorr"			{ return handleLex(strdup(yytext), yylineno, TYPE, LIST_ID_TYPE); }
+"Marpa"				{ return handleLex(strdup(yytext), yylineno, TYPE, QUEUE_ID_TYPE); }
+"Parr"				{ return handleLex(strdup(yytext), yylineno, TYPE, STACK_ID_TYPE); }
+"Pia"				{ return handleLex(strdup(yytext), yylineno, TYPE, MAP_ID_TYPE); }
+"Fila"				{ return handleLex(strdup(yytext), yylineno, TYPE, TUPLE_ID_TYPE); }
+"Documento"			{ return handleLex(strdup(yytext), yylineno, TYPE, DOCUMENT_ID_TYPE); }
+
+
 {integer}         	{ return handleLex(strdup(yytext), yylineno, NUMBER, UNKNOWN_OPERATOR); }
 {float}         	{ return handleLex(strdup(yytext), yylineno, NUMBER, UNKNOWN_OPERATOR); }
 "vazio"				{ return handleLex(strdup(yytext), yylineno, NIL, UNKNOWN_OPERATOR); }

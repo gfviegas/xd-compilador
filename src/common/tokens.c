@@ -90,6 +90,41 @@ char* translateOperator(Operator operator) {
 	}
 }
 
+char* translateIDType(IDType type) {
+	switch (type) {
+		case INT_ID_TYPE:
+			return "Numero";
+		case FLOAT_ID_TYPE:
+			return "NumeroQuebrado";
+		case CHAR_ID_TYPE:
+			return "Letra";
+		case STRING_ID_TYPE:
+			return "Palavra";
+		case BINARY_ID_TYPE:
+			return "ZeriUm";
+		case BOOLEAN_ID_TYPE:
+			return "ÉOuNumÉ";
+		case ATOM_ID_TYPE:
+			return "Bolota";
+		case ARRAY_ID_TYPE:
+			return "Lista";
+		case LIST_ID_TYPE:
+			return "Vetorr";
+		case QUEUE_ID_TYPE:
+			return "Marpa";
+		case STACK_ID_TYPE:
+			return "Parr";
+		case MAP_ID_TYPE:
+			return "Pia";
+		case TUPLE_ID_TYPE:
+			return "Fila";
+		case DOCUMENT_ID_TYPE:
+			return "Documento";
+		default:
+			return "NONE";
+	}
+}
+
 void printToken(Token token) {
 	char* tokenStr = translateToken(token);
 	return cprintf(YELLOW, tokenStr);

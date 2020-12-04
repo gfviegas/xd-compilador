@@ -12,9 +12,8 @@
 
 typedef struct Symbol* SymbolPointer;
 typedef struct Symbol {
-	Token token;
 	Lexeme lexeme;
-	Operator op;
+	IDType type;
 	SymbolPointer next;
 } Symbol;
 
@@ -29,13 +28,13 @@ SymbolTablePointer createSymbolTable(void);
 
 void initSymbolTable(SymbolTablePointer *table);
 
-SymbolPointer createSymbol(Token token, Lexeme lexeme, Operator op);
+SymbolPointer createSymbol(Lexeme lexeme, IDType type);
 
-void addToSymbolTable(SymbolTablePointer table, Token token, Lexeme lexeme, Operator op);
+void addToSymbolTable(SymbolTablePointer table, Lexeme lexeme, IDType type);
 
-void removeFromSymbolTable(SymbolTablePointer table, int index);
+// void removeFromSymbolTable(SymbolTablePointer table, int index);
 
-SymbolPointer getSymbol(SymbolTablePointer table, int index);
+SymbolPointer getSymbol(SymbolTablePointer table, Lexeme lexeme);
 
 void displaySymbolTable(SymbolTablePointer table);
 

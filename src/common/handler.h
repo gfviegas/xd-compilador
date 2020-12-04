@@ -7,13 +7,20 @@
 #ifndef handler_h
 #define handler_h
 
-#include "symbol.h"
+#include "scope.h"
 
-extern int yylineno, yychar, yydebug, yylval;
+typedef union YYSTYPE {
+	int value;
+	char *lexeme;
+} YYSTYPE;
+
+extern YYSTYPE yylval;
+// extern YYSTYPE yylval;
+extern int yylineno, yychar, yydebug;//, yylval;
 extern char* yytext;
 
 int hasError = 0;
-SymbolTablePointer STable;
+ScopePointer CurrentScope;
 
 /**
  * Script principal
@@ -22,7 +29,11 @@ int run(void);
 
 void handleError(const char *str);
 
-Token handleLex(Lexeme lexeme, int lineNumber, Token token, Operator op);
+Token handleIdentifier(Lexeme lexeme, int lineNumber, Token token, Operator op);
+
+void handleNewScope(void);
+void handleFinishScope(void);
+void handleStatement(YYSTYPE type, YYSTYPE identifier);
 
 // Coisas do Lex/Yacc
 void yyerror(const char *str);

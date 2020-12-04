@@ -1,5 +1,13 @@
 %start begin
-%token MODULE_START MODULE_END ASSIGN DELIMITER CONST TYPE IDENTIFIER RELOP MATHOP NUMBER BOOLEAN RETURN STRING NIL ATOM IF ELSE IF_END FUNC_START FUNC_END THEN PARAN_OPEN PARAN_CLOSE BRACK_OPEN BRACK_CLOSE COMMA
+%union {
+	int value;
+	char *lexeme;
+}
+%token MODULE_START MODULE_END ASSIGN DELIMITER CONST
+%token <value>TYPE
+%token <lexeme> IDENTIFIER
+%token <value>RELOP <value>MATHOP
+%token NUMBER BOOLEAN RETURN STRING NIL ATOM IF ELSE IF_END FUNC_START FUNC_END THEN PARAN_OPEN PARAN_CLOSE BRACK_OPEN BRACK_CLOSE COMMA
 %%
 
 begin                 :   MODULE_START stmt MODULE_END
@@ -11,13 +19,13 @@ stmt                  :   /* épsilon */
                       |   conditional stmt
                       |   returnOperation DELIMITER stmt
                       ;
-declarationVariable   :   CONST TYPE IDENTIFIER ASSIGN value
+declarationVariable   :   CONST TYPE IDENTIFIER ASSIGN value { handleStatement($2, $3); }
                       |   CONST TYPE IDENTIFIER
                       ;
-declarationFunction   :   FUNC_START TYPE IDENTIFIER PARAN_OPEN parameterDeclaration PARAN_CLOSE THEN stmt FUNC_END
+declarationFunction   :   FUNC_START TYPE IDENTIFIER PARAN_OPEN parameterDeclaration PARAN_CLOSE THEN { handleNewScope(); } stmt FUNC_END { handleFinishScope(); }
                       ;
-conditional           :   IF PARAN_OPEN expr PARAN_CLOSE THEN stmt IF_END
-                      |   IF PARAN_OPEN expr PARAN_CLOSE THEN stmt ELSE stmt IF_END
+conditional           :   IF PARAN_OPEN expr PARAN_CLOSE THEN { handleNewScope(); } stmt IF_END { handleFinishScope(); }
+                      |   IF PARAN_OPEN expr PARAN_CLOSE THEN { handleNewScope(); } stmt ELSE stmt IF_END { handleFinishScope(); }
                       ;
 operation             :   IDENTIFIER MATHOP IDENTIFIER
                       |   operation MATHOP operation

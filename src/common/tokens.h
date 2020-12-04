@@ -60,6 +60,24 @@ typedef enum Operator {
 	MAHTOP_POW
 } Operator;
 
+typedef enum IDType {
+	UNKNOWN_ID_TYPE = -1,
+	INT_ID_TYPE,
+	FLOAT_ID_TYPE,
+	CHAR_ID_TYPE,
+	STRING_ID_TYPE,
+	BINARY_ID_TYPE,
+	BOOLEAN_ID_TYPE,
+	ATOM_ID_TYPE,
+	ARRAY_ID_TYPE,
+	LIST_ID_TYPE,
+	QUEUE_ID_TYPE,
+	STACK_ID_TYPE,
+	MAP_ID_TYPE,
+	TUPLE_ID_TYPE,
+	DOCUMENT_ID_TYPE
+} IDType;
+
 /**
  * Um lexema... basicamente uma string
  **/
@@ -67,6 +85,7 @@ typedef char *Lexeme;
 
 char *translateToken(Token token);
 char *translateOperator(Operator operator);
+char *translateIDType(IDType type);
 
 	/**
  * Imprime a saída informando o token encontrado.
