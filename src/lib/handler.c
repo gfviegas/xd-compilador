@@ -89,13 +89,8 @@ void handleFinishScope(void) {
 }
 
 void handleStatement(YYSTYPE type, YYSTYPE identifier) {
-	if (isFunctionBeingEvaluated) {
-		printf("Função sendo evaluada!\n");
-		addToSymbolTable(CurrentScope->table, identifier.meta.identifier, type.meta.type, CurrentIdentifier);
-		return;
-	}
-
-	addToSymbolTable(CurrentScope->table, identifier.meta.identifier, type.meta.type, EMPTY_LEXEME);
+	addToSymbolTable(CurrentScope->table, identifier.meta.identifier, type.meta.type);
+	return;
 }
 
 void checkIdentifierExists(YYSTYPE identifier) {
@@ -153,18 +148,16 @@ void checkTypesMatch(YYSTYPE identifier, YYSTYPE target) {
 }
 
 void handleFunctionOpen(YYSTYPE identifier) {
-	isFunctionBeingEvaluated = 1;
 	CurrentIdentifier = identifier.lexeme;
 }
 
 void handleFunctionClose() {
 	CurrentIdentifier = EMPTY_LEXEME;
-	isFunctionBeingEvaluated = 0;
 }
 
 void checkFunctionReturnType(YYSTYPE value) {
 	char message[200];
-	SymbolPointer functionPointer = searchIdentifierCurrentScope(CurrentScope->father, CurrentIdentifier);
+	SymbolPointer functionPointer = searchIdentifier(CurrentScope, CurrentIdentifier);
 
 	if (functionPointer == NULL) {
 		sprintf(message, "erro fatal ao avaliar o paramêtro %s, a função não existe", value.meta.lexeme);

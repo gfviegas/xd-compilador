@@ -15,7 +15,6 @@ typedef struct Symbol {
 	Lexeme lexeme;
 	IDType type;
 	SymbolPointer next;
-	Lexeme parentIdentifier;
 } Symbol;
 
 typedef struct SymbolTable* SymbolTablePointer;
@@ -31,7 +30,7 @@ void initSymbolTable(SymbolTablePointer *table);
 
 SymbolPointer createSymbol(Lexeme lexeme, IDType type);
 
-void addToSymbolTable(SymbolTablePointer table, Lexeme lexeme, IDType type, Lexeme parentIdentifier);
+void addToSymbolTable(SymbolTablePointer table, Lexeme lexeme, IDType type);
 
 // void removeFromSymbolTable(SymbolTablePointer table, int index);
 

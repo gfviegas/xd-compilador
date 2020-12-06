@@ -27,13 +27,12 @@ SymbolPointer createSymbol(Lexeme lexeme, IDType type) {
 
 	symbol->lexeme = lexeme;
 	symbol->type = type;
-	symbol->parentIdentifier = lexeme;
 	symbol->next = NULL;
 
 	return symbol;
 }
 
-void addToSymbolTable(SymbolTablePointer table, Lexeme lexeme, IDType type, Lexeme parentIdentifier) {
+void addToSymbolTable(SymbolTablePointer table, Lexeme lexeme, IDType type) {
 	SymbolPointer symbol = createSymbol(lexeme, type);
 
 	if (table->amount == 0) {
@@ -99,13 +98,13 @@ void displaySymbolTable(SymbolTablePointer table) {
 	SymbolPointer currentSymbol = table->next;
 
 	cprintf(MAGENTA, "\t %d entradas\n", table->amount);
-	cprintf(MAGENTA, "%3s | %20s | %30s | %30s", "ID", "Tipo", "Lexema", "Identificador Pai");
+	cprintf(MAGENTA, "%3s | %20s | %30s", "ID", "Tipo", "Lexema");
 	cprintLine(MAGENTA);
 
 	while (currentSymbol != NULL) {
 		char *typeStr = idTypeToString(currentSymbol->type);
 
-		cprintf(BLUE, "%3d | %20s | %30s | %30s\n", id, typeStr, currentSymbol->lexeme, currentSymbol->lexeme);
+		cprintf(BLUE, "%3d | %20s | %30s\n", id, typeStr, currentSymbol->lexeme);
 
 		currentSymbol = currentSymbol->next;
 		id += 1;

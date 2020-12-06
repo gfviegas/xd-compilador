@@ -38,7 +38,7 @@ stmt                  :   /* épsilon */
 declarationVariable   :   CONST TYPE IDENTIFIER { checkIdentifierNotExists($3); } ASSIGN value { checkTypesMatch($6, $2); handleStatement($2, $3); }
                       |   CONST TYPE IDENTIFIER { checkIdentifierNotExists($3); handleStatement($2, $3); }
                       ;
-declarationFunction   :   FUNC_START TYPE IDENTIFIER { checkIdentifierNotExists($3); handleStatement($2, $3); handleNewScope(); handleFunctionOpen($3); } PARAN_OPEN parameterDeclaration PARAN_CLOSE { handleFunctionClose(); } THEN stmt FUNC_END { handleFinishScope(); }
+declarationFunction   :   FUNC_START TYPE IDENTIFIER { checkIdentifierNotExists($3); handleStatement($2, $3); handleNewScope(); handleFunctionOpen($3); } PARAN_OPEN parameterDeclaration PARAN_CLOSE THEN stmt FUNC_END { handleFinishScope(); handleFunctionClose(); }
                       ;
 conditional           :   IF PARAN_OPEN operation PARAN_CLOSE THEN { handleNewScope(); } stmt IF_END { handleFinishScope(); }
                       |   IF PARAN_OPEN operation PARAN_CLOSE THEN { handleNewScope(); } stmt ELSE stmt IF_END { handleFinishScope(); }
@@ -70,7 +70,6 @@ parameter             :   /* épsilon */
                       |   value
                       ;
 returnOperation       :   RETURN value { checkFunctionReturnType($2); }
-                      |   RETURN operation
                       ;
 
 %%
