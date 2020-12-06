@@ -10,8 +10,6 @@ int run(void) {
 		return -1;
 	}
 
-	printf("Escopo Atual: %p\n", CurrentScope);
-
 	cprintLine(BLUE);
 	cprintf(TITLE2, "\t Código Fonte:");
 	printf("\n\n");
@@ -29,11 +27,11 @@ int run(void) {
 	printf("\n\n");
 
 	if (!hasError) {
-		cprintf(GREEN, "Trem de compilar rodô demais da conta!\nPrograma sintaticamente correto\n");
+		cprintf(GREEN, "Trem de compilar rodô demais da conta!\nPrograma correto\n");
 		return 0;
 	}
 
-	cprintf(RED, "Trem de compilar deu ruim!\nPrograma sintaticamente incorreto!\n");
+	cprintf(RED, "Trem de compilar deu ruim!\nPrograma incorreto!\n");
 	return 0;
 }
 
@@ -54,39 +52,54 @@ void handleError(const char *str) {
 	printf("\n");
 	cprintf(ERROR, "Uai sô... deu um pobrema: %s na linha %d", str, yylineno);
 	printf("\n\n");
-	cprintf(ERROR, "Cê quiria digitarr");
-	cprintf(ERROR2, " '%s' ", yytext);
-	cprintf(ERROR, "memo??");
-	printf("\n\n");
-	printf("Token problemático: ");
-	printResetColor();
-	printToken(yychar);
-	printResetColor();
-	printf("\n");
+
+	if (hasSemanticError <= 0) {
+		cprintf(ERROR, "Cê quiria digitarr");
+		cprintf(ERROR2, " '%s' ", yytext);
+		cprintf(ERROR, "memo??");
+		printf("\n\n");
+		printf("Token problemático: ");
+		printResetColor();
+		printToken(yychar);
+		printResetColor();
+		printf("\n");
+	}
+
 	hasError = 1;
 }
 
 void handleNewScope(void) {
-	printf("Criando escopo... \n");
 	createScope(&CurrentScope);
-	printf("Escopo Atual: %p\n", CurrentScope);
 }
 
 void handleFinishScope(void) {
-	printf("Finalizando escopo... \n");
 	finishScope(&CurrentScope);
-	printf("Escopo Atual: %p\n", CurrentScope);
 }
 
 void handleStatement(YYSTYPE type, YYSTYPE identifier) {
-	printf("\n Tipo: %d == %s \n", type.value, translateIDType(type.value));
-	printf("\n Identificador: %s \n", identifier.lexeme);
-
 	addToSymbolTable(CurrentScope->table, identifier.lexeme, type.value);
-	displaySymbolTable(CurrentScope->table);
+}
 
-	printf("Testando teste: %p\n", searchIdentifier(CurrentScope, "teste"));
-	printf("Testando bussanga: %p\n", searchIdentifier(CurrentScope, "bussanga"));
-	// printf("\n\nTYPE: %s, IDENTIFIER: %s \n\n", type.lexeme, identifier.lexeme);
-	// printf("Avaliando tipos e etc... \n");
+void checkIdentifierExists(YYSTYPE identifier) {
+	SymbolPointer idPointer = searchIdentifier(CurrentScope, identifier.lexeme);
+	char message[200];
+
+	if (idPointer == NULL) {
+		sprintf(message, "erro semântico: o identificador %s não foi declarado", identifier.lexeme);
+		hasSemanticError = 1;
+		yyerror(message);
+		// YYABORT;
+	}
+}
+
+void checkIdentifierNotExists(YYSTYPE identifier) {
+	char message[200];
+	SymbolPointer idPointer = searchIdentifierCurrentScope(CurrentScope, identifier.lexeme);
+
+	if (idPointer != NULL) {
+		sprintf(message, "erro semântico - o identificador %s já foi declarado no escopo atual", identifier.lexeme);
+		hasSemanticError = 1;
+		yyerror(message);
+		// YYABORT;
+	}
 }

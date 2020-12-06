@@ -22,6 +22,7 @@ void initScope(ScopePointer *scope, ScopePointer father);
 void createScope(ScopePointer *currentScope);
 
 SymbolPointer searchIdentifier(ScopePointer firstScope, Lexeme lexeme);
+SymbolPointer searchIdentifierCurrentScope(ScopePointer currentScope, Lexeme lexeme);
 
 void finishScope(ScopePointer *currentScope);
 

@@ -19,39 +19,39 @@ stmt                  :   /* épsilon */
                       |   conditional stmt
                       |   returnOperation DELIMITER stmt
                       ;
-declarationVariable   :   CONST TYPE IDENTIFIER ASSIGN value { handleStatement($2, $3); }
-                      |   CONST TYPE IDENTIFIER
+declarationVariable   :   CONST TYPE IDENTIFIER { checkIdentifierNotExists($3); } ASSIGN value { handleStatement($2, $3); }
+                      |   CONST TYPE IDENTIFIER { checkIdentifierNotExists($3); } { handleStatement($2, $3); }
                       ;
-declarationFunction   :   FUNC_START TYPE IDENTIFIER PARAN_OPEN parameterDeclaration PARAN_CLOSE THEN { handleNewScope(); } stmt FUNC_END { handleFinishScope(); }
+declarationFunction   :   FUNC_START TYPE IDENTIFIER { checkIdentifierNotExists($3); } PARAN_OPEN parameterDeclaration PARAN_CLOSE THEN { handleNewScope(); } stmt FUNC_END { handleFinishScope(); }
                       ;
 conditional           :   IF PARAN_OPEN expr PARAN_CLOSE THEN { handleNewScope(); } stmt IF_END { handleFinishScope(); }
                       |   IF PARAN_OPEN expr PARAN_CLOSE THEN { handleNewScope(); } stmt ELSE stmt IF_END { handleFinishScope(); }
                       ;
-operation             :   IDENTIFIER MATHOP IDENTIFIER
+operation             :   IDENTIFIER { checkIdentifierExists($1); } MATHOP IDENTIFIER { checkIdentifierExists($3); }
                       |   operation MATHOP operation
-                      |   operation MATHOP IDENTIFIER
-                      |   IDENTIFIER MATHOP operation
-                      |   NUMBER MATHOP IDENTIFIER
-                      |   IDENTIFIER MATHOP NUMBER
+                      |   operation MATHOP IDENTIFIER { checkIdentifierExists($3); }
+                      |   IDENTIFIER { checkIdentifierExists($1); } MATHOP operation
+                      |   NUMBER MATHOP IDENTIFIER { checkIdentifierExists($3); }
+                      |   IDENTIFIER { checkIdentifierExists($1); } MATHOP NUMBER
                       |   callFunction
                       ;
 expr                  :   value RELOP value
                       |   value
                       |   callFunction
                       ;
-callFunction          :   IDENTIFIER PARAN_OPEN parameter PARAN_CLOSE
-                      |   IDENTIFIER
+callFunction          :   IDENTIFIER { checkIdentifierExists($1); } PARAN_OPEN parameter PARAN_CLOSE
+                      |   IDENTIFIER { checkIdentifierExists($1); }
                       ;
 value                 :   STRING
                       |   NUMBER
                       |   BOOLEAN
-                      |   IDENTIFIER
+                      |   IDENTIFIER { checkIdentifierExists($1); }
 					  |	  NIL
                       |   callFunction
                       ;
 parameterDeclaration  :   /* épsilon */
-                      |   TYPE IDENTIFIER COMMA parameterDeclaration
-                      |   TYPE IDENTIFIER
+                      |   TYPE IDENTIFIER { checkIdentifierNotExists($2); } COMMA parameterDeclaration
+                      |   TYPE IDENTIFIER { checkIdentifierNotExists($2); }
                       ;
 parameter             :   /* épsilon */
                       |   value COMMA parameter

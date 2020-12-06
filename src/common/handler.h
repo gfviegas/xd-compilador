@@ -14,12 +14,14 @@ typedef union YYSTYPE {
 	char *lexeme;
 } YYSTYPE;
 
+
 extern YYSTYPE yylval;
 // extern YYSTYPE yylval;
 extern int yylineno, yychar, yydebug;//, yylval;
 extern char* yytext;
 
 int hasError = 0;
+int hasSemanticError = 0;
 ScopePointer CurrentScope;
 
 /**
@@ -34,6 +36,9 @@ Token handleIdentifier(Lexeme lexeme, int lineNumber, Token token, Operator op);
 void handleNewScope(void);
 void handleFinishScope(void);
 void handleStatement(YYSTYPE type, YYSTYPE identifier);
+
+void checkIdentifierExists(YYSTYPE identifier);
+void checkIdentifierNotExists(YYSTYPE identifier);
 
 // Coisas do Lex/Yacc
 void yyerror(const char *str);

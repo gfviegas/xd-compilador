@@ -37,6 +37,12 @@ SymbolPointer searchIdentifier(ScopePointer firstScope, Lexeme lexeme) {
 	return NULL;
 }
 
+SymbolPointer searchIdentifierCurrentScope(ScopePointer currentScope, Lexeme lexeme) {
+	if (currentScope == NULL) return NULL;
+
+	// Busca no escopo atual a célula com o lexema
+	return getSymbol(currentScope->table, lexeme);
+}
 
 void finishScope(ScopePointer *currentScope) {
 	ScopePointer toRemove = *currentScope;
