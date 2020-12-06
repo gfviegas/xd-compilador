@@ -1,3 +1,16 @@
 assim
-	trem Numero coisa ingual 0 uai
+	negocio Numero div(Numero x) intao
+		devorve 0 uai
+	tendeu
+
+	negocio Numero multiplica(Numero x, Numero y) intao
+		devorve "xesque" uai
+	tendeu
+
+	trem Palavra texto ingual "olha so uma coisa" uai
+	trem Numero coisa ingual 5 uai
+	trem Numero otaCoisa ingual 10 uai
+
+	trem Numero resultado ingual div(coisa, otaCoisa) uai
+	trem Numero novoResultado ingual texto uai
 cabô

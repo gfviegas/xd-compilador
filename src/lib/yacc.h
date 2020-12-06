@@ -67,19 +67,20 @@ extern int yydebug;
     BOOLEAN = 268,                 /* BOOLEAN  */
     RETURN = 269,                  /* RETURN  */
     STRING = 270,                  /* STRING  */
-    NIL = 271,                     /* NIL  */
-    ATOM = 272,                    /* ATOM  */
-    IF = 273,                      /* IF  */
-    ELSE = 274,                    /* ELSE  */
-    IF_END = 275,                  /* IF_END  */
-    FUNC_START = 276,              /* FUNC_START  */
-    FUNC_END = 277,                /* FUNC_END  */
-    THEN = 278,                    /* THEN  */
-    PARAN_OPEN = 279,              /* PARAN_OPEN  */
-    PARAN_CLOSE = 280,             /* PARAN_CLOSE  */
-    BRACK_OPEN = 281,              /* BRACK_OPEN  */
-    BRACK_CLOSE = 282,             /* BRACK_CLOSE  */
-    COMMA = 283                    /* COMMA  */
+    CHAR = 271,                    /* CHAR  */
+    NIL = 272,                     /* NIL  */
+    ATOM = 273,                    /* ATOM  */
+    IF = 274,                      /* IF  */
+    ELSE = 275,                    /* ELSE  */
+    IF_END = 276,                  /* IF_END  */
+    FUNC_START = 277,              /* FUNC_START  */
+    FUNC_END = 278,                /* FUNC_END  */
+    THEN = 279,                    /* THEN  */
+    PARAN_OPEN = 280,              /* PARAN_OPEN  */
+    PARAN_CLOSE = 281,             /* PARAN_CLOSE  */
+    BRACK_OPEN = 282,              /* BRACK_OPEN  */
+    BRACK_CLOSE = 283,             /* BRACK_CLOSE  */
+    COMMA = 284                    /* COMMA  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -100,30 +101,32 @@ extern int yydebug;
 #define BOOLEAN 268
 #define RETURN 269
 #define STRING 270
-#define NIL 271
-#define ATOM 272
-#define IF 273
-#define ELSE 274
-#define IF_END 275
-#define FUNC_START 276
-#define FUNC_END 277
-#define THEN 278
-#define PARAN_OPEN 279
-#define PARAN_CLOSE 280
-#define BRACK_OPEN 281
-#define BRACK_CLOSE 282
-#define COMMA 283
+#define CHAR 271
+#define NIL 272
+#define ATOM 273
+#define IF 274
+#define ELSE 275
+#define IF_END 276
+#define FUNC_START 277
+#define FUNC_END 278
+#define THEN 279
+#define PARAN_OPEN 280
+#define PARAN_CLOSE 281
+#define BRACK_OPEN 282
+#define BRACK_CLOSE 283
+#define COMMA 284
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 2 "yacc.l"
+#line 6 "yacc.l"
 
-	int value;
+	int XESQUE;
 	char *lexeme;
+	MetaValue meta;
 
-#line 127 "yacc.h"
+#line 130 "yacc.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

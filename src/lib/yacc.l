@@ -1,13 +1,29 @@
+%{
+	#include "tokens.h"
+%}
+
 %start begin
 %union {
-	int value;
+	int XESQUE;
 	char *lexeme;
+	MetaValue meta;
 }
 %token MODULE_START MODULE_END ASSIGN DELIMITER CONST
-%token <value>TYPE
-%token <lexeme> IDENTIFIER
-%token <value>RELOP <value>MATHOP
-%token NUMBER BOOLEAN RETURN STRING NIL ATOM IF ELSE IF_END FUNC_START FUNC_END THEN PARAN_OPEN PARAN_CLOSE BRACK_OPEN BRACK_CLOSE COMMA
+%token <meta> TYPE
+%token <meta> IDENTIFIER
+%token <meta> RELOP
+%token <meta> MATHOP
+%token <meta> NUMBER
+%token <meta> BOOLEAN
+%token RETURN
+%token <meta> STRING
+%token <meta> CHAR
+%token <meta> NIL
+%token <meta> ATOM
+%token IF ELSE IF_END FUNC_START FUNC_END THEN PARAN_OPEN PARAN_CLOSE BRACK_OPEN BRACK_CLOSE COMMA
+
+%type <meta> value
+%type <meta> callFunction
 %%
 
 begin                 :   MODULE_START stmt MODULE_END
@@ -19,30 +35,26 @@ stmt                  :   /* épsilon */
                       |   conditional stmt
                       |   returnOperation DELIMITER stmt
                       ;
-declarationVariable   :   CONST TYPE IDENTIFIER { checkIdentifierNotExists($3); } ASSIGN value { handleStatement($2, $3); }
-                      |   CONST TYPE IDENTIFIER { checkIdentifierNotExists($3); } { handleStatement($2, $3); }
+declarationVariable   :   CONST TYPE IDENTIFIER { checkIdentifierNotExists($3); } ASSIGN value { checkTypesMatch($6, $2); handleStatement($2, $3); }
+                      |   CONST TYPE IDENTIFIER { checkIdentifierNotExists($3); handleStatement($2, $3); }
                       ;
-declarationFunction   :   FUNC_START TYPE IDENTIFIER { checkIdentifierNotExists($3); } PARAN_OPEN parameterDeclaration PARAN_CLOSE THEN { handleNewScope(); } stmt FUNC_END { handleFinishScope(); }
+declarationFunction   :   FUNC_START TYPE IDENTIFIER { checkIdentifierNotExists($3); handleStatement($2, $3); handleNewScope(); handleFunctionOpen($3); } PARAN_OPEN parameterDeclaration PARAN_CLOSE { handleFunctionClose(); } THEN stmt FUNC_END { handleFinishScope(); }
                       ;
-conditional           :   IF PARAN_OPEN expr PARAN_CLOSE THEN { handleNewScope(); } stmt IF_END { handleFinishScope(); }
-                      |   IF PARAN_OPEN expr PARAN_CLOSE THEN { handleNewScope(); } stmt ELSE stmt IF_END { handleFinishScope(); }
+conditional           :   IF PARAN_OPEN operation PARAN_CLOSE THEN { handleNewScope(); } stmt IF_END { handleFinishScope(); }
+                      |   IF PARAN_OPEN operation PARAN_CLOSE THEN { handleNewScope(); } stmt ELSE stmt IF_END { handleFinishScope(); }
                       ;
-operation             :   IDENTIFIER { checkIdentifierExists($1); } MATHOP IDENTIFIER { checkIdentifierExists($3); }
-                      |   operation MATHOP operation
-                      |   operation MATHOP IDENTIFIER { checkIdentifierExists($3); }
-                      |   IDENTIFIER { checkIdentifierExists($1); } MATHOP operation
-                      |   NUMBER MATHOP IDENTIFIER { checkIdentifierExists($3); }
-                      |   IDENTIFIER { checkIdentifierExists($1); } MATHOP NUMBER
-                      |   callFunction
-                      ;
-expr                  :   value RELOP value
+operation             :   callFunction MATHOP callFunction
+                      |   callFunction MATHOP NUMBER
+                      |   NUMBER MATHOP callFunction
+                      |   value RELOP value
                       |   value
-                      |   callFunction
                       ;
 callFunction          :   IDENTIFIER { checkIdentifierExists($1); } PARAN_OPEN parameter PARAN_CLOSE
                       |   IDENTIFIER { checkIdentifierExists($1); }
                       ;
-value                 :   STRING
+value                 :   CHAR
+                      |   STRING
+                      |   ATOM
                       |   NUMBER
                       |   BOOLEAN
                       |   IDENTIFIER { checkIdentifierExists($1); }
@@ -50,14 +62,14 @@ value                 :   STRING
                       |   callFunction
                       ;
 parameterDeclaration  :   /* épsilon */
-                      |   TYPE IDENTIFIER { checkIdentifierNotExists($2); } COMMA parameterDeclaration
-                      |   TYPE IDENTIFIER { checkIdentifierNotExists($2); }
+                      |   TYPE IDENTIFIER { checkIdentifierNotExists($2); handleStatement($1, $2); } COMMA parameterDeclaration
+                      |   TYPE IDENTIFIER { checkIdentifierNotExists($2); handleStatement($1, $2); }
                       ;
 parameter             :   /* épsilon */
                       |   value COMMA parameter
                       |   value
                       ;
-returnOperation       :   RETURN value
+returnOperation       :   RETURN value { checkFunctionReturnType($2); }
                       |   RETURN operation
                       ;
 
