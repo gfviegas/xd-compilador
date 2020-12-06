@@ -36,6 +36,10 @@ void addToSymbolTable(SymbolTablePointer table, Lexeme lexeme, IDType type);
 
 SymbolPointer getSymbol(SymbolTablePointer table, Lexeme lexeme);
 
+void printSymbolCell(SymbolPointer symbol, int id);
+
+void printSymbolTableHeader(SymbolTablePointer table);
+
 void displaySymbolTable(SymbolTablePointer table);
 
 #endif

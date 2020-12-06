@@ -93,18 +93,25 @@ void removeFromSymbolTable(SymbolTablePointer table, int index) {
 	}
 }
 
+void printSymbolCell(SymbolPointer symbol, int id) {
+	char *typeStr = idTypeToString(symbol->type);
+	cprintf(BLUE, "%3d | %20s | %30s\n", id, typeStr, symbol->lexeme);
+}
+
+void printSymbolTableHeader(SymbolTablePointer table) {
+	cprintf(MAGENTA, "\t %d entradas\n", table->amount);
+	cprintf(MAGENTA, "%3s | %20s | %30s", "ID", "Tipo", "Lexema");
+	cprintLine(MAGENTA);
+}
+
 void displaySymbolTable(SymbolTablePointer table) {
 	int id = 1;
 	SymbolPointer currentSymbol = table->next;
 
-	cprintf(MAGENTA, "\t %d entradas\n", table->amount);
-	cprintf(MAGENTA, "%3s | %20s | %30s", "ID", "Tipo", "Lexema");
-	cprintLine(MAGENTA);
+	printSymbolTableHeader(table);
 
 	while (currentSymbol != NULL) {
-		char *typeStr = idTypeToString(currentSymbol->type);
-
-		cprintf(BLUE, "%3d | %20s | %30s\n", id, typeStr, currentSymbol->lexeme);
+		printSymbolCell(currentSymbol, id);
 
 		currentSymbol = currentSymbol->next;
 		id += 1;

@@ -1,6 +1,13 @@
 assim
 	negocio Numero div(Numero x, Numero y) intao
-		trem Palavra xesque ingual 0 uai
-		devorve x divididu y uai
+		trem Palavra xesque ingual "a" uai
+		trem Bolota atomoQualquer ingual :testezinho uai
+
+		# Certo
+		trem Numero resultado ingual x divididu y uai
+		devorve resultado uai
+
+		# Errado
+		#devorve x divididu y uai
 	tendeu
 cabô

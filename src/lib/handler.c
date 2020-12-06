@@ -37,7 +37,7 @@ int run(void) {
 }
 
 Token handleLex(Lexeme lexeme, int lineNumber, Token token, int value, MetaKind kind) {
-	// printToken(token);
+	printToken(token);
 	printSourceCode(lexeme, lineNumber);
 
 	MetaValue metaValue;
@@ -49,7 +49,7 @@ Token handleLex(Lexeme lexeme, int lineNumber, Token token, int value, MetaKind 
 			metaValue.type = value;
 			break;
 		case OPERATOR_META_KIND:
-			metaValue.type = value;
+			metaValue.operator = value;
 			break;
 		default:
 			metaValue.identifier = lexeme;
@@ -158,18 +158,25 @@ void handleFunctionClose() {
 void checkFunctionReturnType(YYSTYPE value) {
 	char message[200];
 	SymbolPointer functionPointer = searchIdentifier(CurrentScope, CurrentIdentifier);
+	SymbolPointer valuePointer = searchIdentifier(CurrentScope, value.meta.lexeme);
+	IDType valueType = value.meta.type;
+	IDType functionType = functionPointer->type;
 
 	if (functionPointer == NULL) {
-		sprintf(message, "erro fatal ao avaliar o paramêtro %s, a função não existe", value.meta.lexeme);
+		sprintf(message, "erro ao avaliar o paramêtro %s, identificador não encontrado", value.meta.lexeme);
 		hasSemanticError = 1;
 		yyerror(message);
 		return;
 	}
 
-	IDType valueType = value.meta.type;
-	IDType functionType = functionPointer->type;
+	if (valuePointer == NULL && valueType != functionType) {
+		sprintf(message, "erro semântico - tipo %s esperado para o retorno da função %s ", idTypeToString(functionType), functionPointer->lexeme);
+		hasSemanticError = 1;
+		yyerror(message);
+		return;
+	}
 
-	if (functionType != valueType) {
+	if (valuePointer != NULL && valuePointer->type != functionType) {
 		sprintf(message, "erro semântico - tipo %s esperado para o retorno da função %s ", idTypeToString(functionType), functionPointer->lexeme);
 		hasSemanticError = 1;
 		yyerror(message);

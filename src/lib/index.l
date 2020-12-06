@@ -18,8 +18,8 @@ hexadecimal     			0X({digit}|[A-Fa-f])*
 integer                		{hexadecimal}|{decimal}
 float                 		[0-9]+(([Ee][+]([0-9]+))*|[.][0-9]+|[.][0-9]*[Ee][+][0-9]+)
 atom						\:{downcaseLetter}+
-char                 		["'].["']
-string                 		["'].*["']
+char                 		['].[']
+string                 		["].*["]
 comment      				#.*$
 identifier             		{letter}+({upcaseLetter}{downcaseLetter}*)*
 staticType					(Numero|NumeroQuebrado|Letra|Palavra|ZeriUm|ÉOuNumÉ|Bolota|Lista|Vetorr|Marpa|Parr|Pia|Fila|Documento)
@@ -34,8 +34,8 @@ eol	       					\n
 {comment}    		{}
 
 "Nada"				{ return handleLex(strdup(yytext), yylineno, NIL_TOKEN, UNKNOWN_OPERATOR, UNKNOWN_META_KIND); }
-"Vera"				{ return handleLex(strdup(yytext), yylineno, BOOLEAN_TOKEN, UNKNOWN_OPERATOR, UNKNOWN_META_KIND); }
-"Bobagi"			{ return handleLex(strdup(yytext), yylineno, BOOLEAN_TOKEN, UNKNOWN_OPERATOR, UNKNOWN_META_KIND); }
+"Vera"				{ return handleLex(strdup(yytext), yylineno, BOOLEAN_TOKEN, BOOLEAN_ID_TYPE, IDTYPE_META_KIND); }
+"Bobagi"			{ return handleLex(strdup(yytext), yylineno, BOOLEAN_TOKEN, BOOLEAN_ID_TYPE, IDTYPE_META_KIND); }
 "ingual"			{ return handleLex(strdup(yytext), yylineno, ASSIGN_TOKEN, UNKNOWN_OPERATOR, UNKNOWN_META_KIND); }
 
 "ingualzin"			{ return handleLex(strdup(yytext), yylineno, RELOP_TOKEN, RELOP_EQ, OPERATOR_META_KIND); }

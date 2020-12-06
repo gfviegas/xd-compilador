@@ -122,11 +122,10 @@ union YYSTYPE
 {
 #line 6 "yacc.l"
 
-	int XESQUE;
 	char *lexeme;
 	MetaValue meta;
 
-#line 130 "yacc.h"
+#line 129 "yacc.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

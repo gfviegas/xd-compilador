@@ -4,7 +4,6 @@
 
 %start begin
 %union {
-	int XESQUE;
 	char *lexeme;
 	MetaValue meta;
 }
@@ -24,6 +23,7 @@
 
 %type <meta> value
 %type <meta> callFunction
+%type <meta> operation
 %%
 
 begin                 :   MODULE_START stmt MODULE_END
@@ -35,7 +35,8 @@ stmt                  :   /* épsilon */
                       |   conditional stmt
                       |   returnOperation DELIMITER stmt
                       ;
-declarationVariable   :   CONST TYPE IDENTIFIER { checkIdentifierNotExists($3); } ASSIGN value { checkTypesMatch($6, $2); handleStatement($2, $3); }
+declarationVariable   :   CONST TYPE IDENTIFIER { checkIdentifierNotExists($3); } ASSIGN operation { checkTypesMatch($6, $2); handleStatement($2, $3); }
+                    //   |   CONST TYPE IDENTIFIER { checkIdentifierNotExists($3); } ASSIGN operation { checkTypesMatch($6, $2); handleStatement($2, $3); }
                       |   CONST TYPE IDENTIFIER { checkIdentifierNotExists($3); handleStatement($2, $3); }
                       ;
 declarationFunction   :   FUNC_START TYPE IDENTIFIER { checkIdentifierNotExists($3); handleStatement($2, $3); handleNewScope(); handleFunctionOpen($3); } PARAN_OPEN parameterDeclaration PARAN_CLOSE THEN stmt FUNC_END { handleFinishScope(); handleFunctionClose(); }
@@ -46,6 +47,7 @@ conditional           :   IF PARAN_OPEN operation PARAN_CLOSE THEN { handleNewSc
 operation             :   callFunction MATHOP callFunction
                       |   callFunction MATHOP NUMBER
                       |   NUMBER MATHOP callFunction
+                      |   value MATHOP value
                       |   value RELOP value
                       |   value
                       ;
