@@ -6,6 +6,9 @@ void initScope(ScopePointer *scope, ScopePointer father) {
 
 	(*scope)->father = father;
 	(*scope)->table = createSymbolTable();
+
+	// Adicionando variáveis globais da linguagem.
+	addToSymbolTable((*scope)->table, "desembucha", STRING_ID_TYPE);
 }
 
 void createScope(ScopePointer *currentScope) {

@@ -1322,13 +1322,13 @@ yyreduce:
 
   case 17:
 #line 44 "yacc.l"
-                                                                                           { handleNewScope(); handleIfStmtBeginST(); }
+                                                                                          { handleNewScope(); handleIfStmtBeginST(); }
 #line 1327 "yacc.c"
     break;
 
   case 18:
 #line 44 "yacc.l"
-                                                                                                                                                    { handleFinishScope(); handlePopST(); handlePopST(); }
+                                                                                                                                                   { handleFinishScope(); handlePopST(); handlePopST(); }
 #line 1333 "yacc.c"
     break;
 
@@ -1340,13 +1340,13 @@ yyreduce:
 
   case 20:
 #line 45 "yacc.l"
-                                                                                           { handleNewScope(); handleIfStmtBeginST(); }
+                                                                                          { handleNewScope(); handleIfStmtBeginST(); }
 #line 1345 "yacc.c"
     break;
 
   case 21:
 #line 45 "yacc.l"
-                                                                                                                                                              { handleFinishScope(); handlePopST(); handlePopST(); }
+                                                                                                                                                             { handleFinishScope(); handlePopST(); handlePopST(); }
 #line 1351 "yacc.c"
     break;
 
