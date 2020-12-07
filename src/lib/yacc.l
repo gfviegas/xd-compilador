@@ -36,7 +36,6 @@ stmt                  :   /* épsilon */
                       |   returnOperation DELIMITER stmt
                       ;
 declarationVariable   :   CONST TYPE IDENTIFIER { checkIdentifierNotExists($3); handleVariableDeclarationST($3, $2); } ASSIGN operation { checkTypesMatch($6, $2); handleStatement($2, $3); handlePopST(); }
-                    //   |   CONST TYPE IDENTIFIER { checkIdentifierNotExists($3); } ASSIGN operation { checkTypesMatch($6, $2); handleStatement($2, $3); }
                       |   CONST TYPE IDENTIFIER { checkIdentifierNotExists($3); handleVariableDeclarationST($3, $2); handleStatement($2, $3); handlePopST(); }
                       ;
 declarationFunction   :   FUNC_START TYPE IDENTIFIER { checkIdentifierNotExists($3); handleStatement($2, $3); handleNewScope(); handleFunctionOpen($3); handleFunctionBeginST($3, $2); } PARAN_OPEN parameterDeclaration PARAN_CLOSE THEN { handleFunctionBodyBeginST(); } stmt FUNC_END { handleFinishScope(); handleFunctionClose(); handlePopST();handlePopST(); }
@@ -60,7 +59,7 @@ value                 :   CHAR
                       |   NUMBER
                       |   BOOLEAN
                       |   IDENTIFIER { checkIdentifierExists($1); }
-					  |	  NIL
+					            |	  NIL
                       |   callFunction
                       ;
 parameterDeclaration  :   /* épsilon */

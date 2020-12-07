@@ -6,9 +6,6 @@ void printPattern(Pattern pattern, Lexeme lexeme) {
 	cprintf(YELLOW, "Tipo: ");
 
 	switch (pattern) {
-	// case UNKNOWN:
-	// 	cprintf(GREEN, "%28s", "");
-	// 	break;
 	case IDENTIFIER:
 		cprintf(GREEN, "%28s", "Identificador");
 		break;
@@ -18,9 +15,6 @@ void printPattern(Pattern pattern, Lexeme lexeme) {
 	case FLOAT:
 		cprintf(GREEN, "%28s", "Float");
 		break;
-	// case BINARY:
-	// 	cprintf(GREEN, "%28s", "Binario");
-	// 	break;
 	case STRING:
 		cprintf(GREEN, "%28s", "String");
 		break;
