@@ -1,20 +1,22 @@
 assim
-	negocio Numero div(Numero x) intao
+	negocio Numero zerado(Numero x) intao
 		devorve 0 uai
 	tendeu
 
 	negocio Numero div(Numero x, Numero y) intao
-		devorve x divididu y uai
+		trem Numero resultado ingual x divididu y uai
+		devorve resultado uai
 	tendeu
 
 	negocio Bolota principal(Marpa opcoes) intao
 		trem Palavra teste ingual "uma string qualquer" uai
-		trem Numero float ingual 2039.102 uai
+		# trem Numero float ingual 2039.102 uai # Erro: float != inteiro
+		trem NumeroQuebrado float ingual 2039.102 uai # Erro: float != inteiro
 
 		cêsabese (float ingualzin vazio) intao
-			desembucha("O xesque aqui ficou vazia sô") uai
+			div("O xesque aqui ficou vazia sô") uai
 		sinao
-			desembucha("O xesque não tá vazia") uai
+			div("O xesque não tá vazia") uai
 		intaotabao
 
 		desembucha(teste) uai

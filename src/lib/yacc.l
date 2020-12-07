@@ -41,8 +41,8 @@ declarationVariable   :   CONST TYPE IDENTIFIER { checkIdentifierNotExists($3); 
                       ;
 declarationFunction   :   FUNC_START TYPE IDENTIFIER { checkIdentifierNotExists($3); handleStatement($2, $3); handleNewScope(); handleFunctionOpen($3); handleFunctionBeginST($3, $2); } PARAN_OPEN parameterDeclaration PARAN_CLOSE THEN { handleFunctionBodyBeginST(); } stmt FUNC_END { handleFinishScope(); handleFunctionClose(); handlePopST();handlePopST(); }
                       ;
-conditional           :   IF PARAN_OPEN { handleIfBeginST(); } operation  PARAN_CLOSE THEN { handleNewScope(); handleIfStmtBeginST(); } stmt IF_END { handleFinishScope(); handlePopST(); handlePopST(); }
-                      |   IF PARAN_OPEN { handleIfBeginST(); } operation  PARAN_CLOSE THEN { handleNewScope(); handleIfStmtBeginST(); } stmt ELSE stmt IF_END { handleFinishScope(); handlePopST(); handlePopST(); }
+conditional           :   IF PARAN_OPEN { handleIfBeginST(); } operation PARAN_CLOSE THEN { handleNewScope(); handleIfStmtBeginST(); } stmt IF_END { handleFinishScope(); handlePopST(); handlePopST(); }
+                      |   IF PARAN_OPEN { handleIfBeginST(); } operation PARAN_CLOSE THEN { handleNewScope(); handleIfStmtBeginST(); } stmt ELSE stmt IF_END { handleFinishScope(); handlePopST(); handlePopST(); }
                       ;
 operation             :   callFunction MATHOP callFunction { handleMathOpST($1, $2, $3); }
                       |   callFunction MATHOP NUMBER { handleMathOpST($1, $2, $3); }
