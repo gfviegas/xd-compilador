@@ -7,8 +7,10 @@
 #ifndef handler_h
 #define handler_h
 
+#include "stack.h"
 #include "tokens.h"
 #include "scope.h"
+#include "codegen.h"
 #include "yacc.h"
 
 // typedef union YYSTYPE {
@@ -31,6 +33,9 @@ int isFunctionBeingEvaluated = 0;
 Lexeme CurrentIdentifier;
 const Lexeme EMPTY_LEXEME = "";
 
+StackPointer NodeStack;
+int currentNodeParent;
+
 /**
  * Script principal
  **/
@@ -51,6 +56,21 @@ void checkIdentifierExists(YYSTYPE identifier);
 void checkIdentifierNotExists(YYSTYPE identifier);
 void checkTypesMatch(YYSTYPE identifier, YYSTYPE target);
 void checkFunctionReturnType(YYSTYPE value);
+
+// Geracao de árvore sintática
+void handleBeginST();
+void handlePopST();
+void handleGenericST(char *label);
+void handleVariableDeclarationST(YYSTYPE identifier, YYSTYPE type);
+void handleParameterDeclarationST(YYSTYPE identifier, YYSTYPE type);
+void handleFunctionBeginST(YYSTYPE identifier, YYSTYPE type);
+void handleIfBeginST();
+void handleIfStmtBeginST();
+void handleMathOpST(YYSTYPE arg1, YYSTYPE mathop, YYSTYPE arg2);
+void handleRelOpST(YYSTYPE arg1, YYSTYPE relop, YYSTYPE arg2);
+void handleValueST(YYSTYPE value);
+void handleReturnST(YYSTYPE identifier);
+void handleFunctionBodyBeginST();
 
 // Coisas do Lex/Yacc
 void yyerror(const char *str);

@@ -9,7 +9,7 @@ $(TARGET): $(OBJFILES)
 	cd ./src/lib && \
 	flex -o lex.c index.l && \
 	yacc -d yacc.l -o yacc.c  && \
-	gcc lex.c yacc.c logger.c tokens.c scope.c -o ../../build/lex-xd
+	gcc lex.c yacc.c logger.c tokens.c scope.c codegen.c -o ../../build/lex-xd
 
 clean:
 	rm -f $(TARGET) $(shell find . -name '*.h.gch') $(shell find . -name '*.o') $(shell find . -name '*.out') *~

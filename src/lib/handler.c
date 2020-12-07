@@ -1,13 +1,17 @@
 #include "handler.h"
+#include "stack.c"
 
 int run(void) {
-	// searchIdentifier(CurrentScope, "");
+	// Inicializa dados dinamicos
+	initStack(&NodeStack);
 	initScope(&CurrentScope, NULL);
 	CurrentIdentifier = EMPTY_LEXEME;
+	initCodeGen();
 
 	if (CurrentScope == NULL) {
 		cprintf(ERROR2, "Escopo inicial retornou NULL");
 		printf("\n\n");
+		finishCodeGen();
 		return -1;
 	}
 
@@ -29,10 +33,12 @@ int run(void) {
 
 	if (!hasError) {
 		cprintf(GREEN, "Trem de compilar rodô demais da conta!\nPrograma correto\n");
+		finishCodeGen();
 		return 0;
 	}
 
 	cprintf(RED, "Trem de compilar deu ruim!\nPrograma incorreto!\n");
+	finishCodeGen();
 	return 0;
 }
 
@@ -182,4 +188,120 @@ void checkFunctionReturnType(YYSTYPE value) {
 		yyerror(message);
 		return;
 	}
+}
+
+void handleBeginST() {
+	int newNode = insertNodeGraph("START", EMPTY_LEXEME);
+	currentNodeParent = newNode;
+	push(NodeStack, newNode);
+}
+
+void handlePopST() {
+	pop(NodeStack);
+}
+
+void handleGenericST(char *label) {
+	int newNode = insertNodeGraph(label, EMPTY_LEXEME);
+	insertConnection(currentNodeParent, newNode);
+
+	push(NodeStack, newNode);
+}
+
+void handleVariableDeclarationST(YYSTYPE identifier, YYSTYPE type) {
+	int assignNode = insertNodeGraph("ASSIGN", "constant");
+
+	int idNode = insertNodeGraph(identifier.meta.lexeme, type.meta.lexeme);
+	insertConnection(getTop(NodeStack), assignNode);
+	insertConnection(assignNode, idNode);
+
+	push(NodeStack, idNode);
+}
+
+void handleParameterDeclarationST(YYSTYPE identifier, YYSTYPE type) {
+	int assignNode = insertNodeGraph("ASSIGN", "parameter");
+
+	int idNode = insertNodeGraph(identifier.meta.lexeme, type.meta.lexeme);
+	insertConnection(getTop(NodeStack), assignNode);
+	insertConnection(assignNode, idNode);
+}
+
+void handleIfBeginST() {
+	int idNode = insertNodeGraph("IF", EMPTY_LEXEME);
+	insertConnection(getTop(NodeStack), idNode);
+
+	push(NodeStack, idNode);
+
+	int condNode = insertNodeGraph("COND", EMPTY_LEXEME);
+	insertConnection(idNode, condNode);
+
+	push(NodeStack, condNode);
+}
+
+void handleIfStmtBeginST() {
+	pop(NodeStack);
+
+	int blockNode = insertNodeGraph("THEN", EMPTY_LEXEME);
+	insertConnection(getTop(NodeStack), blockNode);
+
+	push(NodeStack, blockNode);
+}
+
+void handleFunctionBeginST(YYSTYPE identifier, YYSTYPE type) {
+	int assignNode = insertNodeGraph("ASSIGN", "function");
+
+	int idNode = insertNodeGraph(identifier.meta.lexeme, type.meta.lexeme);
+	insertConnection(getTop(NodeStack), assignNode);
+	insertConnection(assignNode, idNode);
+
+	push(NodeStack, idNode);
+
+	int paramNode = insertNodeGraph("PARAMS", EMPTY_LEXEME);
+	insertConnection(idNode, paramNode);
+
+	push(NodeStack, paramNode);
+}
+
+void handleFunctionBodyBeginST() {
+	pop(NodeStack);
+
+	int blockNode = insertNodeGraph("THEN", EMPTY_LEXEME);
+	insertConnection(getTop(NodeStack), blockNode);
+
+	push(NodeStack, blockNode);
+}
+
+void handleMathOpST(YYSTYPE arg1, YYSTYPE mathop, YYSTYPE arg2) {
+	int operationNode = insertNodeGraph("OPERATION", "mathop");
+
+	int mathopNode = insertNodeGraph("MATHOP", mathop.meta.lexeme);
+	insertConnection(getTop(NodeStack), operationNode);
+	insertConnection(operationNode, mathopNode);
+	insertConnection(mathopNode, insertNodeGraph(arg1.meta.lexeme, EMPTY_LEXEME));
+	insertConnection(mathopNode, insertNodeGraph(arg2.meta.lexeme, EMPTY_LEXEME));
+}
+
+void handleRelOpST(YYSTYPE arg1, YYSTYPE relop, YYSTYPE arg2) {
+	int operationNode = insertNodeGraph("OPERATION", "relop");
+
+	int relopNode = insertNodeGraph("RELOP", relop.meta.lexeme);
+	insertConnection(getTop(NodeStack), operationNode);
+	insertConnection(operationNode, relopNode);
+	insertConnection(relopNode, insertNodeGraph(arg1.meta.lexeme, EMPTY_LEXEME));
+	insertConnection(relopNode, insertNodeGraph(arg2.meta.lexeme, EMPTY_LEXEME));
+}
+
+void handleValueST(YYSTYPE value) {
+	int valueNode = insertNodeGraph("VALUE", EMPTY_LEXEME);
+
+	int idNode = insertNodeGraph(value.meta.lexeme, EMPTY_LEXEME);
+	insertConnection(getTop(NodeStack), valueNode);
+	insertConnection(valueNode, idNode);
+}
+
+void handleReturnST(YYSTYPE identifier) {
+	int valueNode = insertNodeGraph("RETURN", EMPTY_LEXEME);
+
+	int idNode = insertNodeGraph(identifier.meta.lexeme, EMPTY_LEXEME);
+	insertConnection(getTop(NodeStack), valueNode);
+	insertConnection(valueNode, idNode);
 }
