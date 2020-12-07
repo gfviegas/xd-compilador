@@ -1,5 +1,5 @@
 /**
- * Define tipos de padrão que o programa reconhece e como imprmi-los.
+ * Define tipos de padrão que o programa reconhece e como imprimi-los.
  * @author Gustavo Viegas (3026)
  *
  **/
@@ -12,7 +12,7 @@
 #include "logger.h"
 
 /**
- * Token da linguagem
+ * Tokens da linguagem
  **/
 typedef enum Token {
 	UNKNOWN_TOKEN = -1,
@@ -92,7 +92,9 @@ typedef enum MetaKind {
 typedef char *Lexeme;
 
 
-// Representacao de uma celula qualquer para o yyval
+/**
+ * Representação de uma célula qualquer para o yylval
+ **/
 typedef struct MetaValue {
 	union {
 		OperatorType operator;
@@ -114,10 +116,33 @@ IDType stringToIDType(char* str);
  */
 void printToken(Token token);
 
+/**
+ * Imprime o número da linha do código
+ *
+ * @param   int   lineNumber  Número da linha
+ *
+ * @return  void              
+ */
 void printLineNumber(int lineNumber);
 
+/**
+ * Imprime o lexema reconhecido e a linha encontrada 
+ *
+ * @param   Lexeme lexeme      Lexema reconhecido pelo compilador
+ *
+ * @param   int    lineNumber  Número da linha
+ *
+ * @return  void              
+ */
 void printSourceCode(Lexeme lexeme, int lineNumber);
 
+/**
+ * Imprime todo o código fonte que foi reconhecido
+ *
+ * @param   void  void  
+ *
+ * @return  void        
+ */
 void printTable(void);
 
 #endif

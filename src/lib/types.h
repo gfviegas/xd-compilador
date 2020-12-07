@@ -19,7 +19,6 @@ typedef enum Pattern
 	IDENTIFIER,
 	INT,
 	FLOAT,
-	// BINARY,
 	STRING,
 	ATOM,
 	NIL,
