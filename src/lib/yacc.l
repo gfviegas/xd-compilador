@@ -26,7 +26,7 @@
 %type <meta> operation
 %%
 
-begin                 :   MODULE_START stmt MODULE_END
+begin                 :   MODULE_START { handleBeginST(); } stmt MODULE_END
                       ;
 stmt                  :   /* épsilon */
                       |   declarationVariable DELIMITER stmt
@@ -35,21 +35,21 @@ stmt                  :   /* épsilon */
                       |   conditional stmt
                       |   returnOperation DELIMITER stmt
                       ;
-declarationVariable   :   CONST TYPE IDENTIFIER { checkIdentifierNotExists($3); } ASSIGN operation { checkTypesMatch($6, $2); handleStatement($2, $3); }
+declarationVariable   :   CONST TYPE IDENTIFIER { checkIdentifierNotExists($3); handleVariableDeclarationST($3, $2); } ASSIGN operation { checkTypesMatch($6, $2); handleStatement($2, $3); handlePopST(); }
                     //   |   CONST TYPE IDENTIFIER { checkIdentifierNotExists($3); } ASSIGN operation { checkTypesMatch($6, $2); handleStatement($2, $3); }
-                      |   CONST TYPE IDENTIFIER { checkIdentifierNotExists($3); handleStatement($2, $3); }
+                      |   CONST TYPE IDENTIFIER { checkIdentifierNotExists($3); handleVariableDeclarationST($3, $2); handleStatement($2, $3); handlePopST(); }
                       ;
-declarationFunction   :   FUNC_START TYPE IDENTIFIER { checkIdentifierNotExists($3); handleStatement($2, $3); handleNewScope(); handleFunctionOpen($3); } PARAN_OPEN parameterDeclaration PARAN_CLOSE THEN stmt FUNC_END { handleFinishScope(); handleFunctionClose(); }
+declarationFunction   :   FUNC_START TYPE IDENTIFIER { checkIdentifierNotExists($3); handleStatement($2, $3); handleNewScope(); handleFunctionOpen($3); handleFunctionBeginST($3, $2); } PARAN_OPEN parameterDeclaration PARAN_CLOSE THEN { handleFunctionBodyBeginST(); } stmt FUNC_END { handleFinishScope(); handleFunctionClose(); handlePopST();handlePopST(); }
                       ;
-conditional           :   IF PARAN_OPEN operation PARAN_CLOSE THEN { handleNewScope(); } stmt IF_END { handleFinishScope(); }
-                      |   IF PARAN_OPEN operation PARAN_CLOSE THEN { handleNewScope(); } stmt ELSE stmt IF_END { handleFinishScope(); }
+conditional           :   IF PARAN_OPEN { handleIfBeginST(); } operation  PARAN_CLOSE THEN { handleNewScope(); handleIfStmtBeginST(); } stmt IF_END { handleFinishScope(); handlePopST(); handlePopST(); }
+                      |   IF PARAN_OPEN { handleIfBeginST(); } operation  PARAN_CLOSE THEN { handleNewScope(); handleIfStmtBeginST(); } stmt ELSE stmt IF_END { handleFinishScope(); handlePopST(); handlePopST(); }
                       ;
-operation             :   callFunction MATHOP callFunction
-                      |   callFunction MATHOP NUMBER
-                      |   NUMBER MATHOP callFunction
-                      |   value MATHOP value
-                      |   value RELOP value
-                      |   value
+operation             :   callFunction MATHOP callFunction { handleMathOpST($1, $2, $3); }
+                      |   callFunction MATHOP NUMBER { handleMathOpST($1, $2, $3); }
+                      |   NUMBER MATHOP callFunction { handleMathOpST($1, $2, $3); }
+                      |   value MATHOP value { handleMathOpST($1, $2, $3); }
+                      |   value RELOP value { handleRelOpST($1, $2, $3); }
+                      |   value { handleValueST($1); }
                       ;
 callFunction          :   IDENTIFIER { checkIdentifierExists($1); } PARAN_OPEN parameter PARAN_CLOSE
                       |   IDENTIFIER { checkIdentifierExists($1); }
@@ -64,14 +64,14 @@ value                 :   CHAR
                       |   callFunction
                       ;
 parameterDeclaration  :   /* épsilon */
-                      |   TYPE IDENTIFIER { checkIdentifierNotExists($2); handleStatement($1, $2); } COMMA parameterDeclaration
-                      |   TYPE IDENTIFIER { checkIdentifierNotExists($2); handleStatement($1, $2); }
+                      |   TYPE IDENTIFIER { checkIdentifierNotExists($2); handleStatement($1, $2); handleParameterDeclarationST($2, $1); } COMMA parameterDeclaration
+                      |   TYPE IDENTIFIER { checkIdentifierNotExists($2); handleStatement($1, $2); handleParameterDeclarationST($2, $1); }
                       ;
 parameter             :   /* épsilon */
                       |   value COMMA parameter
                       |   value
                       ;
-returnOperation       :   RETURN value { checkFunctionReturnType($2); }
+returnOperation       :   RETURN value { checkFunctionReturnType($2); handleReturnST($2); }
                       ;
 
 %%
