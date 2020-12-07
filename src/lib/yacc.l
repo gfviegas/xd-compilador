@@ -42,7 +42,7 @@ declarationVariable   :   CONST TYPE IDENTIFIER { checkIdentifierNotExists($3); 
 declarationFunction   :   FUNC_START TYPE IDENTIFIER { checkIdentifierNotExists($3); handleStatement($2, $3); handleNewScope(); handleFunctionOpen($3); handleFunctionBeginST($3, $2); } PARAN_OPEN parameterDeclaration PARAN_CLOSE THEN { handleFunctionBodyBeginST(); } stmt FUNC_END { handleFinishScope(); handleFunctionClose(); handlePopST();handlePopST(); }
                       ;
 conditional           :   IF PARAN_OPEN { handleIfBeginST(); } operation PARAN_CLOSE THEN { handleNewScope(); handleIfStmtBeginST(); } stmt IF_END { handleFinishScope(); handlePopST(); handlePopST(); }
-                      |   IF PARAN_OPEN { handleIfBeginST(); } operation PARAN_CLOSE THEN { handleNewScope(); handleIfStmtBeginST(); } stmt ELSE stmt IF_END { handleFinishScope(); handlePopST(); handlePopST(); }
+                      |   IF PARAN_OPEN { handleIfBeginST(); } operation PARAN_CLOSE THEN { handleNewScope(); handleIfStmtBeginST(); } stmt ELSE  { handleFinishScope(); handlePopST(); handlePopST(); handleNewScope(); handleIfStmtBeginST(); } stmt IF_END { handleFinishScope(); handlePopST(); handlePopST(); }
                       ;
 operation             :   callFunction MATHOP callFunction { handleMathOpST($1, $2, $3); }
                       |   callFunction MATHOP NUMBER { handleMathOpST($1, $2, $3); }
@@ -51,7 +51,7 @@ operation             :   callFunction MATHOP callFunction { handleMathOpST($1, 
                       |   value RELOP value { handleRelOpST($1, $2, $3); }
                       |   value { handleValueST($1); }
                       ;
-callFunction          :   IDENTIFIER { checkIdentifierExists($1); } PARAN_OPEN parameter PARAN_CLOSE
+callFunction          :   IDENTIFIER { checkIdentifierExists($1); } PARAN_OPEN { handleCallFuncBeginST($1); } parameter PARAN_CLOSE { handlePopST(); handlePopST(); }
                       |   IDENTIFIER { checkIdentifierExists($1); }
                       ;
 value                 :   CHAR
@@ -68,8 +68,8 @@ parameterDeclaration  :   /* épsilon */
                       |   TYPE IDENTIFIER { checkIdentifierNotExists($2); handleStatement($1, $2); handleParameterDeclarationST($2, $1); }
                       ;
 parameter             :   /* épsilon */
-                      |   value COMMA parameter
-                      |   value
+                      |   value { handleValueST($1); } COMMA parameter
+                      |   value { handleValueST($1); }
                       ;
 returnOperation       :   RETURN value { checkFunctionReturnType($2); handleReturnST($2); }
                       ;

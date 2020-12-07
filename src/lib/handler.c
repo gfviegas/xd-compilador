@@ -226,7 +226,7 @@ void handleParameterDeclarationST(YYSTYPE identifier, YYSTYPE type) {
 }
 
 void handleIfBeginST() {
-	int idNode = insertNodeGraph("IF", EMPTY_LEXEME);
+	int idNode = insertNodeGraph("BRANCH", EMPTY_LEXEME);
 	insertConnection(getTop(NodeStack), idNode);
 
 	push(NodeStack, idNode);
@@ -304,4 +304,16 @@ void handleReturnST(YYSTYPE identifier) {
 	int idNode = insertNodeGraph(identifier.meta.lexeme, EMPTY_LEXEME);
 	insertConnection(getTop(NodeStack), valueNode);
 	insertConnection(valueNode, idNode);
+}
+
+void handleCallFuncBeginST(YYSTYPE identifier) {
+	int idNode = insertNodeGraph("FUNC_CALL", identifier.meta.lexeme);
+	insertConnection(getTop(NodeStack), idNode);
+
+	push(NodeStack, idNode);
+
+	int paramsNode = insertNodeGraph("PARAMS", EMPTY_LEXEME);
+	insertConnection(idNode, paramsNode);
+
+	push(NodeStack, paramsNode);
 }

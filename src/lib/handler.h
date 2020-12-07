@@ -71,6 +71,7 @@ void handleRelOpST(YYSTYPE arg1, YYSTYPE relop, YYSTYPE arg2);
 void handleValueST(YYSTYPE value);
 void handleReturnST(YYSTYPE identifier);
 void handleFunctionBodyBeginST();
+void handleCallFuncBeginST(YYSTYPE identifier);
 
 // Coisas do Lex/Yacc
 void yyerror(const char *str);

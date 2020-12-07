@@ -13,9 +13,7 @@ assim
 		# trem Numero float ingual 2039.102 uai # Erro: float != inteiro
 		trem NumeroQuebrado float ingual 2039.102 uai # Erro: float != inteiro
 
-		cêsabese (float ingualzin vazio) intao
-			div("O xesque aqui ficou vazia sô") uai
-		sinao
+		cêsabese (zerado(0) ingualzin div(20, 3)) intao
 			div("O xesque não tá vazia") uai
 		intaotabao
 
