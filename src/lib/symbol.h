@@ -10,16 +10,23 @@
 #include <stdlib.h>
 #include "tokens.h"
 
+// Ponteiro para um símbolo
 typedef struct Symbol* SymbolPointer;
 typedef struct Symbol {
+	// Lexema do símbolo
 	Lexeme lexeme;
+	// Tipo do símbolo
 	IDType type;
+	// Ponteiro para o próximo símbolo da lista
 	SymbolPointer next;
 } Symbol;
 
+// Ponteiro para a tabela de símbolos
 typedef struct SymbolTable* SymbolTablePointer;
 typedef struct SymbolTable {
+	// Ponteiro para a célula cabeça
 	SymbolPointer next;
+	// Quantidade de símbolos na tabela
 	int amount;
 } SymbolTable;
 
