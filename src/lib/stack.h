@@ -9,9 +9,13 @@
 
 #include <stdlib.h>
 
+// Ponteiro para uma pilha
 typedef struct Stack* StackPointer;
+// Repreentação de uma pilha de inteiros
 typedef struct Stack {
+	// Índice atual do topo da pilha
 	int currentTop;
+	// Valores na pilha
 	int values[100];
 } Stack;
 

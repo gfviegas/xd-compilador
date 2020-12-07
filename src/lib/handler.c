@@ -107,7 +107,6 @@ void checkIdentifierExists(YYSTYPE identifier) {
 		sprintf(message, "erro semântico: o identificador %s não foi declarado", identifier.meta.lexeme);
 		hasSemanticError = 1;
 		yyerror(message);
-		// YYABORT;
 	}
 }
 
@@ -119,7 +118,6 @@ void checkIdentifierNotExists(YYSTYPE identifier) {
 		sprintf(message, "erro semântico - o identificador %s já foi declarado no escopo atual", identifier.meta.lexeme);
 		hasSemanticError = 1;
 		yyerror(message);
-		// YYABORT;
 	}
 }
 
