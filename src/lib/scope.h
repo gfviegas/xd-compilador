@@ -10,41 +10,24 @@
 #include <stdlib.h>
 #include "symbol.h"
 
+// Ponteiro para um escopo
 typedef struct Scope* ScopePointer;
+
+// Representação de um escopo do compilador
 typedef struct Scope {
+	// Quem é o escopo pai. Quando é o escopo raiz, este valor é NULL
 	ScopePointer father;
+	// A tabela de símbolos deste escopo
 	SymbolTablePointer table;
 } Scope;
 
 
 void initScope(ScopePointer *scope, ScopePointer father);
-
 void createScope(ScopePointer *currentScope);
 
 SymbolPointer searchIdentifier(ScopePointer firstScope, Lexeme lexeme);
 SymbolPointer searchIdentifierCurrentScope(ScopePointer currentScope, Lexeme lexeme);
 
 void finishScope(ScopePointer *currentScope);
-
-// ScopePointer currentScope;
-// Scope{
-// 	father : null,
-// 	table : SymbolTablePointer(CRIA A TABELA, INSERE O Q TIVER Q INSERIR...)
-// }
-
-// Leu um token que cria um novo escopo (ex: intao)
-// -> Cria um novo scope
-// 	NovoScope = Aloca memoria
-// 	= Scope{
-// 		father: currentScope,
-// 		table: SymbolTablePointer(CRIA A TABELA)
-// 	}
-// 	CurrentScope = NovoScope
-
-// 	-> Leu um token, tem que inserir na tabela, vai inserir em currentScope.table
-// 	-> Leu um token, precisa fazer analise semantica? Procura em currentScope.table. Não achou? Procura em currentScope.father.table. Não achou? .... Até currentScope.father = NULL
-
-// Leu um token que acaba um novo escopo (ex: tendeu)
-// 	-> currentScope = currentScope.father
 
 #endif

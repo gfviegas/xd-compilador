@@ -1,5 +1,5 @@
 /**
- * Codigo Intermediario
+ * Geração de código intermediário
  * @author Gustavo Viegas (3026)
  *
  **/
@@ -11,50 +11,38 @@
 #include <string.h>
 #include <stdio.h>
 
-typedef enum Boolean {
-	FALSE = 0,
-	TRUE = 1
-} Boolean;
-
 FILE *graphOutput;
 
+/**
+ * Abre o arquivo de output do grafo e aponta o ponteiro graphOutput para sua referência
+ **/
 void initCodeGen();
+
+/**
+ * Insere um vértice ao grafo
+ *
+ * @param   char*  label      Texto descritivo do vértice
+ * @param   char*  extraInfo  Informações secundárias do vértice
+ *
+ * @return  int              Identificador do vértice no grafo
+ */
 int insertNodeGraph(char *label, char *extraInfo);
+
+/**
+ * Insere uma aresta ao grafo
+ *
+ * @param   int   node1  Identificador do primeiro vértice da aresta
+ * @param   int   node2  Identificador do segundo vértice da aresta
+ *
+ * @return  void
+ */
 void insertConnection(int node1, int node2);
-void finishCodeGen();
 
-// enum SyntaxTreeCode {
-// 	SUM,
-// };
-
-// typedef enum SyntaxTreeBinaryOperation {
-// 	RELOP_STOPER,
-// 	RELOP,
-// } SyntaxTreeBinaryOperation;
-
-// typedef struct SyntaxNode *SyntaxNodePointer;
-// typedef struct SyntaxTreeBinary {
-// 	SyntaxTreeBinaryOperation code;
-
-// 	SyntaxNodePointer left;
-// 	SyntaxNodePointer right;
-// } SyntaxTreeBinary;
-
-// typedef struct SyntaxTreeLeaf {
-// 	union {
-// 		char charValue;
-// 		char *stringValue;
-// 		int intValue;
-// 		float floatValue;
-// 		Boolean booleanValue;
-// 	};
-// } SyntaxTreeLeaf;
-
-// typedef struct SyntaxTree {
-
-
-// } SyntaxTree;
-
-
+/**
+ * Fecha o arquivo aberto
+ *
+ * @return  void
+ */
+void finishCodeGen(void);
 
 #endif
