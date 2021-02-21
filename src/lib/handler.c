@@ -43,7 +43,7 @@ int run(void) {
 }
 
 Token handleLex(Lexeme lexeme, int lineNumber, Token token, int value, MetaKind kind) {
-	printToken(token);
+	// printToken(token);
 	printSourceCode(lexeme, lineNumber);
 
 	MetaValue metaValue;
@@ -96,6 +96,7 @@ void handleFinishScope(void) {
 
 void handleStatement(YYSTYPE type, YYSTYPE identifier) {
 	addToSymbolTable(CurrentScope->table, identifier.meta.identifier, type.meta.type);
+	// displaySymbolTable(CurrentScope->table);
 	return;
 }
 

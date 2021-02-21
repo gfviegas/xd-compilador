@@ -2,12 +2,13 @@ assim
 	trem NumeroQuebrado teste ingual 2.3 uai
 
     cêsabese (teste maió que 5) intao
-        #trem Numero coisa ingual Invalido uai # Invalido nao ta definido
+        # trem Numero coisa ingual Invalido uai # Invalido nao ta definido
         trem Numero coisa ingual 0 uai
-        #trem Numero coisa ingual 20 uai # Numero ja foi definido
+        # trem Numero coisa ingual 20 uai # Numero ja foi definido
 		trem ÉOuNumÉ bussanga ingual Vera uai
 		trem Letra teste ingual 'a' uai
     intaotabao
 
 	trem Palavra coisa ingual "Batata" uai
+	# trem Bolota bussanga ingual 20.3 uai # 20.3 não é uma Bolota
 cabô

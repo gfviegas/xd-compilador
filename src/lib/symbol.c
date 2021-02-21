@@ -99,7 +99,7 @@ void printSymbolCell(SymbolPointer symbol, int id) {
 }
 
 void printSymbolTableHeader(SymbolTablePointer table) {
-	cprintf(MAGENTA, "\t %d entradas\n", table->amount);
+	cprintf(MAGENTA, "\n\tTabela %p - %d entradas\n", table, table->amount);
 	cprintf(MAGENTA, "%3s | %20s | %30s", "ID", "Tipo", "Lexema");
 	cprintLine(MAGENTA);
 }

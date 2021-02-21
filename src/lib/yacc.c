@@ -629,10 +629,10 @@ static const yytype_int8 yytranslate[] =
 static const yytype_int8 yyrline[] =
 {
        0,    29,    29,    29,    31,    32,    33,    34,    35,    36,
-      38,    38,    40,    42,    42,    42,    44,    44,    44,    45,
-      45,    45,    45,    47,    48,    49,    50,    51,    52,    54,
-      54,    54,    55,    57,    58,    59,    60,    61,    62,    63,
-      64,    66,    67,    67,    68,    70,    71,    71,    72,    74
+      38,    38,    39,    41,    41,    41,    43,    43,    43,    44,
+      44,    44,    44,    46,    47,    48,    49,    50,    51,    53,
+      53,    53,    54,    56,    57,    58,    59,    60,    61,    62,
+      63,    65,    66,    66,    67,    69,    70,    70,    71,    73
 };
 #endif
 
@@ -1299,163 +1299,163 @@ yyreduce:
     break;
 
   case 12:
-#line 40 "yacc.l"
+#line 39 "yacc.l"
                                                 { checkIdentifierNotExists((yyvsp[0].meta)); handleVariableDeclarationST((yyvsp[0].meta), (yyvsp[-1].meta)); handleStatement((yyvsp[-1].meta), (yyvsp[0].meta)); handlePopST(); }
 #line 1305 "yacc.c"
     break;
 
   case 13:
-#line 42 "yacc.l"
+#line 41 "yacc.l"
                                                      { checkIdentifierNotExists((yyvsp[0].meta)); handleStatement((yyvsp[-1].meta), (yyvsp[0].meta)); handleNewScope(); handleFunctionOpen((yyvsp[0].meta)); handleFunctionBeginST((yyvsp[0].meta), (yyvsp[-1].meta)); }
 #line 1311 "yacc.c"
     break;
 
   case 14:
-#line 42 "yacc.l"
+#line 41 "yacc.l"
                                                                                                                                                                                                                                           { handleFunctionBodyBeginST(); }
 #line 1317 "yacc.c"
     break;
 
   case 15:
-#line 42 "yacc.l"
+#line 41 "yacc.l"
                                                                                                                                                                                                                                                                                          { handleFinishScope(); handleFunctionClose(); handlePopST();handlePopST(); }
 #line 1323 "yacc.c"
     break;
 
   case 16:
-#line 44 "yacc.l"
+#line 43 "yacc.l"
                                         { handleIfBeginST(); }
 #line 1329 "yacc.c"
     break;
 
   case 17:
-#line 44 "yacc.l"
+#line 43 "yacc.l"
                                                                                           { handleNewScope(); handleIfStmtBeginST(); }
 #line 1335 "yacc.c"
     break;
 
   case 18:
-#line 44 "yacc.l"
+#line 43 "yacc.l"
                                                                                                                                                    { handleFinishScope(); handlePopST(); handlePopST(); }
 #line 1341 "yacc.c"
     break;
 
   case 19:
-#line 45 "yacc.l"
+#line 44 "yacc.l"
                                         { handleIfBeginST(); }
 #line 1347 "yacc.c"
     break;
 
   case 20:
-#line 45 "yacc.l"
+#line 44 "yacc.l"
                                                                                           { handleNewScope(); handleIfStmtBeginST(); }
 #line 1353 "yacc.c"
     break;
 
   case 21:
-#line 45 "yacc.l"
+#line 44 "yacc.l"
                                                                                                                                                   { handleFinishScope(); handlePopST(); handlePopST(); handleNewScope(); handleIfStmtBeginST(); }
 #line 1359 "yacc.c"
     break;
 
   case 22:
-#line 45 "yacc.l"
+#line 44 "yacc.l"
                                                                                                                                                                                                                                                               { handleFinishScope(); handlePopST(); handlePopST(); }
 #line 1365 "yacc.c"
     break;
 
   case 23:
-#line 47 "yacc.l"
+#line 46 "yacc.l"
                                                            { handleMathOpST((yyvsp[-2].meta), (yyvsp[-1].meta), (yyvsp[0].meta)); }
 #line 1371 "yacc.c"
     break;
 
   case 24:
-#line 48 "yacc.l"
+#line 47 "yacc.l"
                                                      { handleMathOpST((yyvsp[-2].meta), (yyvsp[-1].meta), (yyvsp[0].meta)); }
 #line 1377 "yacc.c"
     break;
 
   case 25:
-#line 49 "yacc.l"
+#line 48 "yacc.l"
                                                      { handleMathOpST((yyvsp[-2].meta), (yyvsp[-1].meta), (yyvsp[0].meta)); }
 #line 1383 "yacc.c"
     break;
 
   case 26:
-#line 50 "yacc.l"
+#line 49 "yacc.l"
                                              { handleMathOpST((yyvsp[-2].meta), (yyvsp[-1].meta), (yyvsp[0].meta)); }
 #line 1389 "yacc.c"
     break;
 
   case 27:
-#line 51 "yacc.l"
+#line 50 "yacc.l"
                                             { handleRelOpST((yyvsp[-2].meta), (yyvsp[-1].meta), (yyvsp[0].meta)); }
 #line 1395 "yacc.c"
     break;
 
   case 28:
-#line 52 "yacc.l"
+#line 51 "yacc.l"
                                 { handleValueST((yyvsp[0].meta)); }
 #line 1401 "yacc.c"
     break;
 
   case 29:
-#line 54 "yacc.l"
+#line 53 "yacc.l"
                                      { checkIdentifierExists((yyvsp[0].meta)); }
 #line 1407 "yacc.c"
     break;
 
   case 30:
-#line 54 "yacc.l"
+#line 53 "yacc.l"
                                                                                { handleCallFuncBeginST((yyvsp[-2].meta)); }
 #line 1413 "yacc.c"
     break;
 
   case 31:
-#line 54 "yacc.l"
+#line 53 "yacc.l"
                                                                                                                                     { handlePopST(); handlePopST(); }
 #line 1419 "yacc.c"
     break;
 
   case 32:
-#line 55 "yacc.l"
+#line 54 "yacc.l"
                                      { checkIdentifierExists((yyvsp[0].meta)); }
 #line 1425 "yacc.c"
     break;
 
   case 38:
-#line 62 "yacc.l"
+#line 61 "yacc.l"
                                      { checkIdentifierExists((yyvsp[0].meta)); }
 #line 1431 "yacc.c"
     break;
 
   case 42:
-#line 67 "yacc.l"
+#line 66 "yacc.l"
                                           { checkIdentifierNotExists((yyvsp[0].meta)); handleStatement((yyvsp[-1].meta), (yyvsp[0].meta)); handleParameterDeclarationST((yyvsp[0].meta), (yyvsp[-1].meta)); }
 #line 1437 "yacc.c"
     break;
 
   case 44:
-#line 68 "yacc.l"
+#line 67 "yacc.l"
                                           { checkIdentifierNotExists((yyvsp[0].meta)); handleStatement((yyvsp[-1].meta), (yyvsp[0].meta)); handleParameterDeclarationST((yyvsp[0].meta), (yyvsp[-1].meta)); }
 #line 1443 "yacc.c"
     break;
 
   case 46:
-#line 71 "yacc.l"
+#line 70 "yacc.l"
                                 { handleValueST((yyvsp[0].meta)); }
 #line 1449 "yacc.c"
     break;
 
   case 48:
-#line 72 "yacc.l"
+#line 71 "yacc.l"
                                 { handleValueST((yyvsp[0].meta)); }
 #line 1455 "yacc.c"
     break;
 
   case 49:
-#line 74 "yacc.l"
+#line 73 "yacc.l"
                                        { checkFunctionReturnType((yyvsp[0].meta)); handleReturnST((yyvsp[0].meta)); }
 #line 1461 "yacc.c"
     break;
@@ -1655,5 +1655,5 @@ yyreturn:
   return yyresult;
 }
 
-#line 77 "yacc.l"
+#line 76 "yacc.l"
 
